@@ -32,11 +32,36 @@ namespace Asimov.API.Persistence.Contexts
                 .WithOne(p => p.Director)
                 .HasForeignKey(p => p.DirectorId);
 
+            builder.Entity<Director>().HasData(
+                new Director
+                {
+                    Id = 1, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "julio@gmail.com",
+                    Phone = "987654321"
+                },
+                new Director
+                {
+                    Id = 2, FirstName = "Yordy", LastName = "Moccho", Age = 20, Email = "yordy@gmail.com",
+                    Phone = "987654322"
+                }
+            );
+
             builder.Entity<Announcement>().ToTable("Announcements");
             builder.Entity<Announcement>().HasKey(p => p.Id);
             builder.Entity<Announcement>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Announcement>().Property(p => p.Title).IsRequired().HasMaxLength(30);
             builder.Entity<Announcement>().Property(p => p.Description).IsRequired().HasMaxLength(300);
+            
+            builder.Entity<Announcement>().HasData(
+                new Announcement
+                {
+                    Id = 1, Title = "First Example title", Description = "Example description 1", DirectorId = 1
+                },
+                new Announcement
+                {
+                    Id = 2, Title = "Second Example title", Description = "Example description 2", DirectorId = 2
+                }
+                
+            );
             
             builder.UseSnakeCaseNamingConvention();
         }
