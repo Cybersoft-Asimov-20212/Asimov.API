@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Asimov.API.Controllers
 {
+    [Produces("application/json")]
     [ApiController]
     [Route("api/v1/[controller]")]
     public class AnnouncementsController : ControllerBase
