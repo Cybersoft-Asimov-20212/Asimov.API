@@ -37,7 +37,7 @@ namespace Asimov.API.Persistence.Repositories
         {
             return await _context.Announcements
                 .Where(p => p.DirectorId == directorId)
-                .Include(p => p.DirectorId)
+                .Include(p => p.Director)
                 .ToListAsync();
         }
 

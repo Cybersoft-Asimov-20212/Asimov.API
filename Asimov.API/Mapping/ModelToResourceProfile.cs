@@ -9,7 +9,7 @@ namespace Asimov.API.Mapping
         public ModelToResourceProfile()
         {
             CreateMap<Director, DirectorResource>();
-            
+            CreateMap<Announcement, AnnouncementResource>();
         }
     }
 }
