@@ -6,6 +6,6 @@
         public string Title { get; set; }
         public string Description { get; set; }
         
-        public DirectorResource Director { get; set; }
+        public int DirectorId { get; set; }
     }
 }
