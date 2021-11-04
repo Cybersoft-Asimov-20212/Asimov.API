@@ -50,6 +50,8 @@ namespace Asimov.API
             services.AddScoped<IDirectorService, DirectorService>();
             services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
             services.AddScoped<IAnnouncementService, AnnouncementService>();
+            services.AddScoped<ITeacherRepository, TeacherRepository>();
+            services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));

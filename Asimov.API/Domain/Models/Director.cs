@@ -13,5 +13,7 @@ namespace Asimov.API.Domain.Models
         public string Phone { get; set; }
 
         public IList<Announcement> Announcements { get; set; } = new List<Announcement>();
+        public IList<Teacher> Teachers { get; set; } = new List<Teacher>();
+        
     }
 }

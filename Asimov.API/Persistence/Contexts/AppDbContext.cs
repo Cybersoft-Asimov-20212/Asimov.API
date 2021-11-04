@@ -9,6 +9,8 @@ namespace Asimov.API.Persistence.Contexts
         public DbSet<Director> Directors { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
         
+        public DbSet<Teacher> Teachers { get; set; }
+        
         public AppDbContext(DbContextOptions options) : base(options)
         {
             
@@ -31,7 +33,14 @@ namespace Asimov.API.Persistence.Contexts
                 .HasMany(p => p.Announcements)
                 .WithOne(p => p.Director)
                 .HasForeignKey(p => p.DirectorId);
-
+            
+            builder.Entity<Director>()
+                .HasMany(p => p.Teachers)
+                .WithOne(p => p.Director)
+                .HasForeignKey(p => p.DirectorId);
+            
+            // TODO: relación con teachers?
+            
             builder.Entity<Director>().HasData(
                 new Director
                 {
@@ -62,6 +71,31 @@ namespace Asimov.API.Persistence.Contexts
                 }
                 
             );
+            // TODO: Teacher
+            
+            builder.Entity<Teacher>().ToTable("Teachers");
+            builder.Entity<Teacher>().HasKey(p => p.Id);
+            builder.Entity<Teacher>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Teacher>().Property(p => p.Point).IsRequired();
+            builder.Entity<Teacher>().Property(p => p.FirstName).IsRequired().HasMaxLength(30);
+            builder.Entity<Teacher>().Property(p => p.LastName).IsRequired().HasMaxLength(30);
+            builder.Entity<Teacher>().Property(p => p.Age).IsRequired();
+            builder.Entity<Teacher>().Property(p => p.Email).IsRequired().HasMaxLength(30);
+            builder.Entity<Teacher>().Property(p => p.Phone).IsRequired().HasMaxLength(30);
+
+            builder.Entity<Teacher>().HasData(
+                new Teacher
+                {
+                    Id = 1, FirstName = "Omar", LastName = "Alvarado", Age = 22, Email = "omar@gmail.com",
+                    Phone = "987654321" , Point = 500 , DirectorId = 1
+                },
+                new Teacher
+                {
+                    Id = 2, FirstName = "Marifer", LastName = "Vasquez", Age = 20, Email = "marifer@gmail.com",
+                    Phone = "987654322" , Point = 400 , DirectorId = 1
+                }
+            );
+            
             
             builder.UseSnakeCaseNamingConvention();
         }
