@@ -9,6 +9,8 @@ namespace Asimov.API.Domain.Repositories
         Task<IEnumerable<Teacher>> ListAsync();
         Task AddAsync(Teacher teacher);
         Task<Teacher> FindByIdAsync(int id);
+        Task<Teacher> FindByEmailAsync(string email);
+        Task<IEnumerable<Teacher>> FindByDirectorId(int directorId);
         void Update(Teacher teacher);
         void Remove(Teacher teacher);
     }

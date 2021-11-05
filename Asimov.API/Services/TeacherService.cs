@@ -12,21 +12,38 @@ namespace Asimov.API.Services
     public class TeacherService : ITeacherService
     {
         private readonly ITeacherRepository _teacherRepository;
+        private readonly IDirectorRepository _directorRepository;
         private readonly IUnitOfWork _unitOfWork;
 
-        public TeacherService(ITeacherRepository teacherRepository, IUnitOfWork unitOfWork)
+        public TeacherService(ITeacherRepository teacherRepository, IDirectorRepository directorRepository, IUnitOfWork unitOfWork)
         {
             _teacherRepository = teacherRepository;
+            _directorRepository = directorRepository;
             _unitOfWork = unitOfWork;
         }
-        
+
         public async Task<IEnumerable<Teacher>> ListAsync()
         {
             return await _teacherRepository.ListAsync();
         }
-        
+
+        public async Task<IEnumerable<Teacher>> ListByDirectorIdAsync(int directorId)
+        {
+            return await _teacherRepository.FindByDirectorId(directorId);
+        }
+
         public async Task<TeacherResponse> SaveAsync(Teacher teacher)
         {
+            var existingDirector = _directorRepository.FindByIdAsync(teacher.DirectorId);
+
+            if (existingDirector == null)
+                return new TeacherResponse("Invalid Director");
+            
+            var existingTeacherWithEmail = await _teacherRepository.FindByEmailAsync(teacher.Email);
+            
+            if(existingTeacherWithEmail != null)
+                return new TeacherResponse("Teacher Email already exist.");
+
             try
             {
                 await _teacherRepository.AddAsync(teacher);
@@ -46,12 +63,24 @@ namespace Asimov.API.Services
 
             if (existingTeacher == null)
                 return new TeacherResponse("Teacher not found");
+            
+            var existingDirector = _directorRepository.FindByIdAsync(teacher.DirectorId);
+
+            if (existingDirector == null)
+                return new TeacherResponse("Invalid Director");
+            
+            var existingTeacherWithEmail = await _teacherRepository.FindByEmailAsync(teacher.Email);
+            
+            if(existingTeacherWithEmail != null && existingTeacherWithEmail.Id != existingTeacher.Id)
+                return new TeacherResponse("Teacher Email already exist.");
+            
             existingTeacher.FirstName = teacher.FirstName;
             existingTeacher.LastName = teacher.LastName;
             existingTeacher.Point = teacher.Point;
             existingTeacher.Age = teacher.Age;
             existingTeacher.Email = teacher.Email;
             existingTeacher.Phone = teacher.Phone;
+            existingTeacher.DirectorId = teacher.DirectorId;
 
             try
             {

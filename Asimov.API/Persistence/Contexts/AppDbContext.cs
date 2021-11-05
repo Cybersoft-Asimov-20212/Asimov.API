@@ -91,7 +91,7 @@ namespace Asimov.API.Persistence.Contexts
                 },
                 new Teacher
                 {
-                    Id = 2, FirstName = "Marifer", LastName = "Vasquez", Age = 20, Email = "marifer@gmail.com",
+                    Id = 2, FirstName = "Maria", LastName = "Vasquez", Age = 20, Email = "marifer@gmail.com",
                     Phone = "987654322" , Point = 400 , DirectorId = 1
                 }
             );

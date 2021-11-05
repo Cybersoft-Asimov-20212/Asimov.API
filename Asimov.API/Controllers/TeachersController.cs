@@ -16,14 +16,14 @@ namespace Asimov.API.Controllers
     {
        private readonly ITeacherService _teacherService;
        private readonly IMapper _mapper;
-
-
+       
        public TeachersController(ITeacherService teacherService, IMapper mapper)
        {
            _teacherService = teacherService;
            _mapper = mapper;
        }
-        [HttpGet]
+       
+       [HttpGet]
        public async Task<IEnumerable<TeacherResource>> GetAllAsync()
        {
            var teachers = await _teacherService.ListAsync();
@@ -41,8 +41,10 @@ namespace Asimov.API.Controllers
            var teacher = _mapper.Map<SaveTeacherResource, Teacher>(resource);
 
            var result= await _teacherService.SaveAsync(teacher);
+           
            if (!result.Success)
                return BadRequest(result.Message);
+           
            var teacherResource = _mapper.Map<Teacher, TeacherResource>(result.Resource);
 
            return Ok(teacherResource);
@@ -60,6 +62,7 @@ namespace Asimov.API.Controllers
             
            if (!result.Success)
                return BadRequest(result.Message);
+           
            var teacherResource = _mapper.Map<Teacher, TeacherResource>(result.Resource);
             
            return Ok(teacherResource);
@@ -72,6 +75,7 @@ namespace Asimov.API.Controllers
             
            if (!result.Success)
                return BadRequest(result.Message);
+           
            var teacherResource = _mapper.Map<Teacher, TeacherResource>(result.Resource);
             
            return Ok(teacherResource);
