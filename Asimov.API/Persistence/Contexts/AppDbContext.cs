@@ -8,9 +8,10 @@ namespace Asimov.API.Persistence.Contexts
     {
         public DbSet<Director> Directors { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
-        
         public DbSet<Teacher> Teachers { get; set; }
-        
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<Item> Items { get; set; }
+
         public AppDbContext(DbContextOptions options) : base(options)
         {
             
@@ -93,6 +94,53 @@ namespace Asimov.API.Persistence.Contexts
                 {
                     Id = 2, FirstName = "Maria", LastName = "Vasquez", Age = 20, Email = "marifer@gmail.com",
                     Phone = "987654322" , Point = 400 , DirectorId = 1
+                }
+            );
+
+
+            builder.Entity<Course>().ToTable("Courses");
+            builder.Entity<Course>().HasKey(p => p.Id);
+            builder.Entity<Course>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Course>().Property(p => p.Name).IsRequired().HasMaxLength(30);
+            builder.Entity<Course>().Property(p => p.Description).IsRequired().HasMaxLength(20);
+            builder.Entity<Course>().Property(p => p.State).IsRequired();
+            
+            builder.Entity<Course>()
+                .HasMany(p => p.Items)
+                .WithOne(p => p.Course)
+                .HasForeignKey(p => p.CourseId);
+
+            builder.Entity<Course>().HasData(
+                new Course
+                {
+                    // TODO: create enum for state Course 
+                    Id = 1, Name = "Algebra", Description = "Course of 1st grade", State = false
+                },
+                new Course
+                {
+                    Id = 2, Name = "Trigonometry", Description = "Course of 2nd grade", State = false
+                }
+            );
+            
+            
+            builder.Entity<Item>().ToTable("Items");
+            builder.Entity<Item>().HasKey(p => p.Id);
+            builder.Entity<Item>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Item>().Property(p => p.Name).IsRequired().HasMaxLength(30);
+            builder.Entity<Item>().Property(p => p.Value).IsRequired();
+            builder.Entity<Item>().Property(p => p.State).IsRequired();
+            
+            builder.Entity<Item>().HasData(
+                new Item
+                {
+                    // TODO: create enum for state Item 
+                    Id = 1, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", 
+                    State = false, CourseId = 1
+                },
+                new Item
+                {
+                    Id = 2, Name = "Documentation", Value = "Today we start with the theorem of...", 
+                    State = false, CourseId = 2
                 }
             );
             

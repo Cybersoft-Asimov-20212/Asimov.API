@@ -11,6 +11,8 @@ namespace Asimov.API.Mapping
             CreateMap<SaveDirectorResource, Director>();
             CreateMap<SaveAnnouncementResource, Announcement>();
             CreateMap<SaveTeacherResource, Teacher>();
+            CreateMap<SaveCourseResource, Course>();
+            CreateMap<SaveItemResource, Item>();
         }
     }
 }
