@@ -50,7 +50,7 @@ namespace Asimov.API.Persistence.Contexts
                 },
                 new Director
                 {
-                    Id = 2, FirstName = "Yordy", LastName = "Moccho", Age = 20, Email = "yordy@gmail.com",
+                    Id = 2, FirstName = "Yordy", LastName = "Mochcco", Age = 20, Email = "yordy@gmail.com",
                     Phone = "987654322"
                 }
             );
@@ -69,6 +69,26 @@ namespace Asimov.API.Persistence.Contexts
                 new Announcement
                 {
                     Id = 2, Title = "Second Example title", Description = "Example description 2", DirectorId = 2
+                },
+                new Announcement
+                {
+                    Id = 3, Title = "Third Example title", Description = "Example description 3", DirectorId = 1
+                },
+                new Announcement
+                {
+                    Id = 4, Title = "Fourth Example title", Description = "Example description 4", DirectorId = 1
+                },new Announcement
+                {
+                    Id = 5, Title = "Fifth Example title", Description = "Example description 5", DirectorId = 1
+                },new Announcement
+                {
+                    Id = 6, Title = "Sixth Example title", Description = "Example description 6", DirectorId = 1
+                },new Announcement
+                {
+                    Id = 7, Title = "Seventh Example title", Description = "Example description 7", DirectorId = 1
+                },new Announcement
+                {
+                    Id = 8, Title = "Eighth Example title", Description = "Example description 8", DirectorId = 1
                 }
                 
             );
@@ -94,6 +114,35 @@ namespace Asimov.API.Persistence.Contexts
                 {
                     Id = 2, FirstName = "Maria", LastName = "Vasquez", Age = 20, Email = "marifer@gmail.com",
                     Phone = "987654322" , Point = 400 , DirectorId = 1
+                },
+                new Teacher
+                {
+                    Id = 3, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "jul@gmail.com",
+                    Phone = "987654321" , Point = 300 , DirectorId = 1
+                },new Teacher
+                {
+                    Id = 4, FirstName = "Yordy", LastName = "Mochcco", Age = 22, Email = "yor@gmail.com",
+                    Phone = "987654321" , Point = 420 , DirectorId = 1
+                },new Teacher
+                {
+                    Id = 5, FirstName = "Rosa", LastName = "Gonzales", Age = 22, Email = "ros@gmail.com",
+                    Phone = "987654321" , Point = 280 , DirectorId = 1
+                },new Teacher
+                {
+                    Id = 6, FirstName = "Piero", LastName = "Perez", Age = 22, Email = "per@gmail.com",
+                    Phone = "987654321" , Point = 340 , DirectorId = 1
+                },new Teacher
+                {
+                    Id = 7, FirstName = "Juan", LastName = "Perez", Age = 22, Email = "jperz@gmail.com",
+                    Phone = "987654321" , Point = 400 , DirectorId = 1
+                },new Teacher
+                {
+                    Id = 8, FirstName = "Rodrigo", LastName = "Sabino", Age = 22, Email = "rod@gmail.com",
+                    Phone = "987654321" , Point = 450 , DirectorId = 1
+                },new Teacher
+                {
+                    Id = 9, FirstName = "Italo", LastName = "Canales", Age = 22, Email = "itsl@gmail.com",
+                    Phone = "987654321" , Point = 520 , DirectorId = 1
                 }
             );
 

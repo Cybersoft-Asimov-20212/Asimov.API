@@ -37,7 +37,7 @@ namespace Asimov.API.Persistence.Repositories
         {
             return await _context.Items
                 .Where(p => p.CourseId == courseId)
-                .Include(p => p.CourseId)
+                .Include(p => p.Course)
                 .ToListAsync();
         }
 
