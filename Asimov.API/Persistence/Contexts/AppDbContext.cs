@@ -11,6 +11,7 @@ namespace Asimov.API.Persistence.Contexts
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Item> Items { get; set; }
+        public DbSet<TeacherCourse> TeacherCourses { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
@@ -168,6 +169,34 @@ namespace Asimov.API.Persistence.Contexts
                 new Course
                 {
                     Id = 2, Name = "Trigonometry", Description = "Course of 2nd grade", State = false
+                },
+                new Course
+                {
+                    Id = 3, Name = "Biology", Description = "Course of 2nd grade", State = false
+                },
+                new Course
+                {
+                    Id = 4, Name = "Arithmetic", Description = "Course of 2nd grade", State = false
+                },
+                new Course
+                {
+                    Id = 5, Name = "Geography", Description = "Course of 2nd grade", State = false
+                },
+                new Course
+                {
+                    Id = 6, Name = "Universal history", Description = "Course of 2nd grade", State = false
+                },
+                new Course
+                {
+                    Id = 7, Name = "Physical", Description = "Course of 2nd grade", State = false
+                },
+                new Course
+                {
+                    Id = 8, Name = "Anatomy", Description = "Course of 2nd grade", State = false
+                },
+                new Course
+                {
+                    Id = 9, Name = "chemistry", Description = "Course of 2nd grade", State = false
                 }
             );
             
@@ -191,6 +220,33 @@ namespace Asimov.API.Persistence.Contexts
                     Id = 2, Name = "Documentation", Value = "Today we start with the theorem of...", 
                     State = false, CourseId = 2
                 }
+            );
+
+
+            builder.Entity<TeacherCourse>().ToTable("TeacherCourses");
+            builder.Entity<TeacherCourse>().HasKey(p => new {p.TeacherId, p.CourseId});
+            builder.Entity<TeacherCourse>().Property(p => p.TeacherId).IsRequired();
+            builder.Entity<TeacherCourse>().Property(p => p.CourseId).IsRequired();
+
+            builder.Entity<TeacherCourse>()
+                .HasOne(p => p.Teacher)
+                .WithMany(p => p.TeacherCourses)
+                .HasForeignKey(p => p.TeacherId);
+            builder.Entity<TeacherCourse>()
+                .HasOne(p => p.Course)
+                .WithMany(p => p.TeacherCourses)
+                .HasForeignKey(p => p.CourseId);
+
+            builder.Entity<TeacherCourse>().HasData(
+                new TeacherCourse {TeacherId = 1, CourseId = 1},
+                new TeacherCourse {TeacherId = 1, CourseId = 2},
+                new TeacherCourse {TeacherId = 2, CourseId = 3},
+                new TeacherCourse {TeacherId = 2, CourseId = 4},
+                new TeacherCourse {TeacherId = 2, CourseId = 5},
+                new TeacherCourse {TeacherId = 2, CourseId = 6},
+                new TeacherCourse {TeacherId = 2, CourseId = 7},
+                new TeacherCourse {TeacherId = 2, CourseId = 8},
+                new TeacherCourse {TeacherId = 2, CourseId = 9}
             );
             
             
