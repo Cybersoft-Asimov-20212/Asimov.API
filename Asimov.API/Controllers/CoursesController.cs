@@ -13,12 +13,12 @@ namespace Asimov.API.Controllers
     [Produces("application/json")]
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class CourseController : ControllerBase
+    public class CoursesController : ControllerBase
     {
         private readonly ICourseService _courseService;
         private readonly IMapper _mapper;
 
-        public CourseController(ICourseService courseService, IMapper mapper)
+        public CoursesController(ICourseService courseService, IMapper mapper)
         {
             _courseService = courseService;
             _mapper = mapper;

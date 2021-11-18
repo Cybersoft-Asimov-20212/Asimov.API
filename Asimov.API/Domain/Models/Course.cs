@@ -15,5 +15,7 @@ namespace Asimov.API.Domain.Models
 
         public IList<Item> Items { get; set; } = new List<Item>();
         public IList<TeacherCourse> TeacherCourses { get; set; } = new List<TeacherCourse>();
+        
+        public IList<CourseCompetence> CourseCompetences { get; set; } = new List<CourseCompetence>();
     }
 }

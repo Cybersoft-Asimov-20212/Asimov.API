@@ -13,6 +13,7 @@ namespace Asimov.API.Mapping
             CreateMap<Teacher, TeacherResource>();
             CreateMap<Course, CourseResource>();
             CreateMap<Item, ItemResource>();
+            CreateMap<Competence, CompetenceResource>();
         }
     }
 }

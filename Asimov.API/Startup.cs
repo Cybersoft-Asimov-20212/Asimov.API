@@ -56,8 +56,12 @@ namespace Asimov.API
             services.AddScoped<ICourseService, CourseService>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<IItemService, ItemService>();
+            services.AddScoped<ICompetenceRepository, CompetenceRepository>();
+            services.AddScoped<ICompetenceService, CompetenceService>();
             services.AddScoped<ITeacherCourseRepository, TeacherCourseRepository>();
             services.AddScoped<ITeacherCourseService, TeacherCourseService>();
+            services.AddScoped<ICourseCompetenceRepository, CourseCompetenceRepository>();
+            services.AddScoped<ICourseCompetenceService, CourseCompetenceService>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddAutoMapper(typeof(Startup));

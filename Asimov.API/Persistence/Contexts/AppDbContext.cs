@@ -12,6 +12,8 @@ namespace Asimov.API.Persistence.Contexts
         public DbSet<Course> Courses { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<TeacherCourse> TeacherCourses { get; set; }
+        public DbSet<Competence> Competences { get; set; }
+        public DbSet<CourseCompetence> CourseCompetences { get; set; }
 
         public AppDbContext(DbContextOptions options) : base(options)
         {
@@ -221,6 +223,22 @@ namespace Asimov.API.Persistence.Contexts
                     State = false, CourseId = 2
                 }
             );
+            
+            builder.Entity<Competence>().ToTable("Competences");
+            builder.Entity<Competence>().HasKey(p => p.Id);
+            builder.Entity<Competence>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
+            builder.Entity<Competence>().Property(p => p.Title).IsRequired().HasMaxLength(30);
+            builder.Entity<Competence>().Property(p => p.Description).IsRequired().HasMaxLength(300);
+
+            builder.Entity<Competence>().HasData(
+                new Competence {Id = 1, Title = "First Title", Description = "First example description"},
+                new Competence {Id = 2, Title = "Second Title", Description = "Second example description"},
+                new Competence {Id = 3, Title = "Third Title", Description = "Third example description"},
+                new Competence {Id = 4, Title = "Fourth Title", Description = "Fourth example description"},
+                new Competence {Id = 5, Title = "Fifth Title", Description = "Fifth example description"},
+                new Competence {Id = 6, Title = "Sixth Title", Description = "Sixth example description"},
+                new Competence {Id = 7, Title = "Seventh Title", Description = "Seventh example description"}
+            );
 
 
             builder.Entity<TeacherCourse>().ToTable("TeacherCourses");
@@ -249,6 +267,30 @@ namespace Asimov.API.Persistence.Contexts
                 new TeacherCourse {TeacherId = 2, CourseId = 9}
             );
             
+            builder.Entity<CourseCompetence>().ToTable("CourseCompetences");
+            builder.Entity<CourseCompetence>().HasKey(p => new {p.CourseId, p.CompetenceId});
+            builder.Entity<CourseCompetence>().Property(p => p.CourseId).IsRequired();
+            builder.Entity<CourseCompetence>().Property(p => p.CompetenceId).IsRequired();
+
+            builder.Entity<CourseCompetence>()
+                .HasOne(p => p.Course)
+                .WithMany(p => p.CourseCompetences)
+                .HasForeignKey(p => p.CourseId);
+            builder.Entity<CourseCompetence>()
+                .HasOne(p => p.Competence)
+                .WithMany(p => p.CourseCompetences)
+                .HasForeignKey(p => p.CompetenceId);
+
+            builder.Entity<CourseCompetence>().HasData(
+                new CourseCompetence {CourseId = 1, CompetenceId = 1},
+                new CourseCompetence {CourseId = 1, CompetenceId = 2},
+                new CourseCompetence {CourseId = 1, CompetenceId = 3},
+                new CourseCompetence {CourseId = 1, CompetenceId = 4},
+                new CourseCompetence {CourseId = 2, CompetenceId = 5},
+                new CourseCompetence {CourseId = 2, CompetenceId = 6},
+                new CourseCompetence {CourseId = 2, CompetenceId = 7},
+                new CourseCompetence {CourseId = 2, CompetenceId = 1}
+            );
             
             builder.UseSnakeCaseNamingConvention();
         }
