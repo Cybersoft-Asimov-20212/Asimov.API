@@ -27,6 +27,11 @@ namespace Asimov.API.Services
             return await _teacherRepository.ListAsync();
         }
 
+        public async Task<Teacher> FindByIdAsync(int id)
+        {
+            return await _teacherRepository.FindByIdAsync(id);
+        }
+
         public async Task<IEnumerable<Teacher>> ListByDirectorIdAsync(int directorId)
         {
             return await _teacherRepository.FindByDirectorId(directorId);

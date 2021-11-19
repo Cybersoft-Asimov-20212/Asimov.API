@@ -42,9 +42,7 @@ namespace Asimov.API.Persistence.Contexts
                 .HasMany(p => p.Teachers)
                 .WithOne(p => p.Director)
                 .HasForeignKey(p => p.DirectorId);
-            
-            // TODO: relación con teachers?
-            
+
             builder.Entity<Director>().HasData(
                 new Director
                 {
@@ -95,7 +93,6 @@ namespace Asimov.API.Persistence.Contexts
                 }
                 
             );
-            // TODO: Teacher
             
             builder.Entity<Teacher>().ToTable("Teachers");
             builder.Entity<Teacher>().HasKey(p => p.Id);
@@ -165,7 +162,6 @@ namespace Asimov.API.Persistence.Contexts
             builder.Entity<Course>().HasData(
                 new Course
                 {
-                    // TODO: create enum for state Course 
                     Id = 1, Name = "Algebra", Description = "Course of 1st grade", State = false
                 },
                 new Course
@@ -213,7 +209,6 @@ namespace Asimov.API.Persistence.Contexts
             builder.Entity<Item>().HasData(
                 new Item
                 {
-                    // TODO: create enum for state Item 
                     Id = 1, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", 
                     State = false, CourseId = 1
                 },

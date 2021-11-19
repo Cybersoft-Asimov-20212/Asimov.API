@@ -31,7 +31,16 @@ namespace Asimov.API.Controllers
            var resources = _mapper.Map<IEnumerable<Teacher>, IEnumerable<TeacherResource>>(teachers);
            return resources;
        }
-       
+
+       [HttpGet("{id}")]
+       public async Task<TeacherResource> GetByIdAsync(int id)
+       {
+           var teacher = await _teacherService.FindByIdAsync(id);
+
+           var resource = _mapper.Map<Teacher, TeacherResource>(teacher);
+           return resource;
+       }
+
        [HttpPost]
        public async Task<IActionResult> PostAsync([FromBody] SaveTeacherResource resource)
        {

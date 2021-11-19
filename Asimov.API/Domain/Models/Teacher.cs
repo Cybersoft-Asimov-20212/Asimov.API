@@ -15,7 +15,6 @@ namespace Asimov.API.Domain.Models
         // Relationships
         public int DirectorId { get; set; }
         public Director Director { get; set; }
-
         public IList<TeacherCourse> TeacherCourses { get; set; } = new List<TeacherCourse>();
     }
 }
