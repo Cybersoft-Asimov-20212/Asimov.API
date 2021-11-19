@@ -44,16 +44,10 @@ namespace Asimov.API.Persistence.Contexts
                 .HasForeignKey(p => p.DirectorId);
 
             builder.Entity<Director>().HasData(
-                new Director
-                {
-                    Id = 1, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "julio@gmail.com",
-                    Phone = "987654321"
-                },
-                new Director
-                {
-                    Id = 2, FirstName = "Yordy", LastName = "Mochcco", Age = 20, Email = "yordy@gmail.com",
-                    Phone = "987654322"
-                }
+                new Director {Id = 1, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "julio@gmail.com", Phone = "987654321"},
+                new Director {Id = 2, FirstName = "Yordy", LastName = "Mochcco", Age = 20, Email = "yordy@gmail.com", Phone = "987654322"},
+                new Director {Id = 3, FirstName = "Pedro", LastName = "Suarez", Age = 35, Email = "pedrito@gmail.com", Phone = "958963854"},
+                new Director {Id = 4, FirstName = "Juan", LastName = "Perez", Age = 26, Email = "jupe@gmail.com", Phone = "985126348"}
             );
 
             builder.Entity<Announcement>().ToTable("Announcements");
@@ -63,34 +57,22 @@ namespace Asimov.API.Persistence.Contexts
             builder.Entity<Announcement>().Property(p => p.Description).IsRequired().HasMaxLength(300);
             
             builder.Entity<Announcement>().HasData(
-                new Announcement
-                {
-                    Id = 1, Title = "First Example title", Description = "Example description 1", DirectorId = 1
-                },
-                new Announcement
-                {
-                    Id = 2, Title = "Second Example title", Description = "Example description 2", DirectorId = 2
-                },
-                new Announcement
-                {
-                    Id = 3, Title = "Third Example title", Description = "Example description 3", DirectorId = 1
-                },
-                new Announcement
-                {
-                    Id = 4, Title = "Fourth Example title", Description = "Example description 4", DirectorId = 1
-                },new Announcement
-                {
-                    Id = 5, Title = "Fifth Example title", Description = "Example description 5", DirectorId = 1
-                },new Announcement
-                {
-                    Id = 6, Title = "Sixth Example title", Description = "Example description 6", DirectorId = 1
-                },new Announcement
-                {
-                    Id = 7, Title = "Seventh Example title", Description = "Example description 7", DirectorId = 1
-                },new Announcement
-                {
-                    Id = 8, Title = "Eighth Example title", Description = "Example description 8", DirectorId = 1
-                }
+                new Announcement {Id = 1, Title = "First Example title", Description = "Example description 1", DirectorId = 1},
+                new Announcement {Id = 2, Title = "Second Example title", Description = "Example description 2", DirectorId = 1},
+                new Announcement {Id = 3, Title = "Third Example title", Description = "Example description 3", DirectorId = 1},
+                new Announcement {Id = 4, Title = "Fourth Example title", Description = "Example description 4", DirectorId = 1},
+                new Announcement {Id = 5, Title = "Fifth Example title", Description = "Example description 5", DirectorId = 1},
+                new Announcement {Id = 6, Title = "Sixth Example title", Description = "Example description 6", DirectorId = 1},
+                new Announcement {Id = 7, Title = "Seventh Example title", Description = "Example description 7", DirectorId = 1},
+                new Announcement {Id = 8, Title = "Eighth Example title", Description = "Example description 8", DirectorId = 1},
+                new Announcement {Id = 9, Title = "First Example title", Description = "Example description 1", DirectorId = 2},
+                new Announcement {Id = 10, Title = "Second Example title", Description = "Example description 2", DirectorId = 2},
+                new Announcement {Id = 11, Title = "Third Example title", Description = "Example description 3", DirectorId = 2},
+                new Announcement {Id = 12, Title = "Fourth Example title", Description = "Example description 4", DirectorId = 2},
+                new Announcement {Id = 13, Title = "Fifth Example title", Description = "Example description 5", DirectorId = 3},
+                new Announcement {Id = 14, Title = "Sixth Example title", Description = "Example description 6", DirectorId = 3},
+                new Announcement {Id = 15, Title = "Seventh Example title", Description = "Example description 7", DirectorId = 3},
+                new Announcement {Id = 16, Title = "Eighth Example title", Description = "Example description 8", DirectorId = 3}
                 
             );
             
@@ -160,42 +142,15 @@ namespace Asimov.API.Persistence.Contexts
                 .HasForeignKey(p => p.CourseId);
 
             builder.Entity<Course>().HasData(
-                new Course
-                {
-                    Id = 1, Name = "Algebra", Description = "Course of 1st grade", State = false
-                },
-                new Course
-                {
-                    Id = 2, Name = "Trigonometry", Description = "Course of 2nd grade", State = false
-                },
-                new Course
-                {
-                    Id = 3, Name = "Biology", Description = "Course of 2nd grade", State = false
-                },
-                new Course
-                {
-                    Id = 4, Name = "Arithmetic", Description = "Course of 2nd grade", State = false
-                },
-                new Course
-                {
-                    Id = 5, Name = "Geography", Description = "Course of 2nd grade", State = false
-                },
-                new Course
-                {
-                    Id = 6, Name = "Universal history", Description = "Course of 2nd grade", State = false
-                },
-                new Course
-                {
-                    Id = 7, Name = "Physical", Description = "Course of 2nd grade", State = false
-                },
-                new Course
-                {
-                    Id = 8, Name = "Anatomy", Description = "Course of 2nd grade", State = false
-                },
-                new Course
-                {
-                    Id = 9, Name = "chemistry", Description = "Course of 2nd grade", State = false
-                }
+                new Course {Id = 1, Name = "Algebra", Description = "Course of 1st grade", State = false}, 
+                new Course {Id = 2, Name = "Trigonometry", Description = "Course of 2nd grade", State = false},
+                new Course {Id = 3, Name = "Biology", Description = "Course of 2nd grade", State = false},
+                new Course {Id = 4, Name = "Arithmetic", Description = "Course of 2nd grade", State = false},
+                new Course {Id = 5, Name = "Geography", Description = "Course of 2nd grade", State = false},
+                new Course {Id = 6, Name = "Universal history", Description = "Course of 2nd grade", State = false},
+                new Course {Id = 7, Name = "Physical", Description = "Course of 2nd grade", State = false},
+                new Course {Id = 8, Name = "Anatomy", Description = "Course of 2nd grade", State = false},
+                new Course {Id = 9, Name = "chemistry", Description = "Course of 2nd grade", State = false}
             );
             
             
@@ -207,16 +162,23 @@ namespace Asimov.API.Persistence.Contexts
             builder.Entity<Item>().Property(p => p.State).IsRequired();
             
             builder.Entity<Item>().HasData(
-                new Item
-                {
-                    Id = 1, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", 
-                    State = false, CourseId = 1
-                },
-                new Item
-                {
-                    Id = 2, Name = "Documentation", Value = "Today we start with the theorem of...", 
-                    State = false, CourseId = 2
-                }
+                new Item {Id = 1, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 1},
+                new Item {Id = 2, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 1},
+                new Item {Id = 3, Name = "Video", Value = "https://www.youtube.com/watch?v=83RUhxsfLWs", State = false, CourseId = 1},
+                new Item {Id = 4, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 2},
+                new Item {Id = 5, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 2},
+                new Item {Id = 6, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 3},
+                new Item {Id = 7, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 3},
+                new Item {Id = 8, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 4},
+                new Item {Id = 9, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 4},
+                new Item {Id = 10, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 5},
+                new Item {Id = 11, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 5},
+                new Item {Id = 12, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 6},
+                new Item {Id = 13, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 6},
+                new Item {Id = 14, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 7},
+                new Item {Id = 15, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 7},
+                new Item {Id = 16, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 8},
+                new Item {Id = 17, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 8}
             );
             
             builder.Entity<Competence>().ToTable("Competences");
@@ -226,13 +188,23 @@ namespace Asimov.API.Persistence.Contexts
             builder.Entity<Competence>().Property(p => p.Description).IsRequired().HasMaxLength(300);
 
             builder.Entity<Competence>().HasData(
-                new Competence {Id = 1, Title = "First Title", Description = "First example description"},
-                new Competence {Id = 2, Title = "Second Title", Description = "Second example description"},
-                new Competence {Id = 3, Title = "Third Title", Description = "Third example description"},
-                new Competence {Id = 4, Title = "Fourth Title", Description = "Fourth example description"},
-                new Competence {Id = 5, Title = "Fifth Title", Description = "Fifth example description"},
-                new Competence {Id = 6, Title = "Sixth Title", Description = "Sixth example description"},
-                new Competence {Id = 7, Title = "Seventh Title", Description = "Seventh example description"}
+                new Competence {Id = 1, Title = "First Title Com", Description = "First example description"},
+                new Competence {Id = 2, Title = "Second Title Com", Description = "Second example description"},
+                new Competence {Id = 3, Title = "Third Title Com", Description = "Third example description"},
+                new Competence {Id = 4, Title = "Fourth Title Com", Description = "Fourth example description"},
+                new Competence {Id = 5, Title = "Fifth Title Com", Description = "Fifth example description"},
+                new Competence {Id = 6, Title = "Sixth Title Com", Description = "Sixth example description"},
+                new Competence {Id = 7, Title = "Seventh Title Com", Description = "Seventh example description"},
+                new Competence {Id = 8, Title = "Eighth Title Com", Description = "Eighth example description"},
+                new Competence {Id = 9, Title = "Nineth Title Com", Description = "Nineth example description"},
+                new Competence {Id = 10, Title = "Tenth Title Com", Description = "Tenth example description"},
+                new Competence {Id = 11, Title = "Eleventh Title Com", Description = "Eleventh example description"},
+                new Competence {Id = 12, Title = "Twelfth Title Com", Description = "Twelfth example description"},
+                new Competence {Id = 13, Title = "thirteenth Title Com", Description = "thirteenth example description"},
+                new Competence {Id = 14, Title = "Fourteenth Title Com", Description = "Fourteenth example description"},
+                new Competence {Id = 15, Title = "Fifteenth Title Com", Description = "Fifteenth example description"},
+                new Competence {Id = 16, Title = "Sixteenth Title Com", Description = "Sixteenth example description"},
+                new Competence {Id = 17, Title = "Seventeenth Title Com", Description = "Seventeenth example description"}
             );
 
 
@@ -253,13 +225,20 @@ namespace Asimov.API.Persistence.Contexts
             builder.Entity<TeacherCourse>().HasData(
                 new TeacherCourse {TeacherId = 1, CourseId = 1},
                 new TeacherCourse {TeacherId = 1, CourseId = 2},
-                new TeacherCourse {TeacherId = 2, CourseId = 3},
-                new TeacherCourse {TeacherId = 2, CourseId = 4},
-                new TeacherCourse {TeacherId = 2, CourseId = 5},
+                new TeacherCourse {TeacherId = 1, CourseId = 3},
+                new TeacherCourse {TeacherId = 1, CourseId = 4},
+                new TeacherCourse {TeacherId = 1, CourseId = 5},
                 new TeacherCourse {TeacherId = 2, CourseId = 6},
                 new TeacherCourse {TeacherId = 2, CourseId = 7},
                 new TeacherCourse {TeacherId = 2, CourseId = 8},
-                new TeacherCourse {TeacherId = 2, CourseId = 9}
+                new TeacherCourse {TeacherId = 2, CourseId = 9},
+                new TeacherCourse {TeacherId = 3, CourseId = 1},
+                new TeacherCourse {TeacherId = 3, CourseId = 2},
+                new TeacherCourse {TeacherId = 3, CourseId = 3},
+                new TeacherCourse {TeacherId = 3, CourseId = 4},
+                new TeacherCourse {TeacherId = 4, CourseId = 5},
+                new TeacherCourse {TeacherId = 4, CourseId = 6},
+                new TeacherCourse {TeacherId = 4, CourseId = 7}
             );
             
             builder.Entity<CourseCompetence>().ToTable("CourseCompetences");
@@ -281,10 +260,27 @@ namespace Asimov.API.Persistence.Contexts
                 new CourseCompetence {CourseId = 1, CompetenceId = 2},
                 new CourseCompetence {CourseId = 1, CompetenceId = 3},
                 new CourseCompetence {CourseId = 1, CompetenceId = 4},
+                new CourseCompetence {CourseId = 1, CompetenceId = 5},
+                new CourseCompetence {CourseId = 1, CompetenceId = 6},
+                new CourseCompetence {CourseId = 1, CompetenceId = 7},
+                new CourseCompetence {CourseId = 1, CompetenceId = 8},
+                new CourseCompetence {CourseId = 2, CompetenceId = 1},
+                new CourseCompetence {CourseId = 2, CompetenceId = 2},
+                new CourseCompetence {CourseId = 2, CompetenceId = 3},
+                new CourseCompetence {CourseId = 2, CompetenceId = 4},
                 new CourseCompetence {CourseId = 2, CompetenceId = 5},
                 new CourseCompetence {CourseId = 2, CompetenceId = 6},
                 new CourseCompetence {CourseId = 2, CompetenceId = 7},
-                new CourseCompetence {CourseId = 2, CompetenceId = 1}
+                new CourseCompetence {CourseId = 3, CompetenceId = 8},
+                new CourseCompetence {CourseId = 3, CompetenceId = 9},
+                new CourseCompetence {CourseId = 3, CompetenceId = 10},
+                new CourseCompetence {CourseId = 3, CompetenceId = 11},
+                new CourseCompetence {CourseId = 3, CompetenceId = 12},
+                new CourseCompetence {CourseId = 3, CompetenceId = 13},
+                new CourseCompetence {CourseId = 4, CompetenceId = 14},
+                new CourseCompetence {CourseId = 4, CompetenceId = 15},
+                new CourseCompetence {CourseId = 4, CompetenceId = 16},
+                new CourseCompetence {CourseId = 4, CompetenceId = 17}
             );
             
             builder.UseSnakeCaseNamingConvention();
