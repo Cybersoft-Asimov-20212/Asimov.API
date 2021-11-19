@@ -1,4 +1,6 @@
-﻿namespace Asimov.API.Domain.Models
+﻿using System.Collections.Generic;
+
+namespace Asimov.API.Domain.Models
 {
     public class Teacher
     {
@@ -13,5 +15,6 @@
         // Relationships
         public int DirectorId { get; set; }
         public Director Director { get; set; }
+        public IList<TeacherCourse> TeacherCourses { get; set; } = new List<TeacherCourse>();
     }
 }

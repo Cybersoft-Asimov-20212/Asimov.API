@@ -8,6 +8,7 @@ namespace Asimov.API.Domain.Services
     public interface ICourseService
     {
         Task<IEnumerable<Course>> ListAsync();
+        Task<Course> FindByIdAsync(int id);
 
         Task<CourseResponse> SaveAsync(Course course);
 

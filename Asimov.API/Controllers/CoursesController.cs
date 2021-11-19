@@ -33,6 +33,14 @@ namespace Asimov.API.Controllers
             return resources;
         }
 
+        [HttpGet("{id}")]
+        public async Task<CourseResource> GetByIdAsync(int id)
+        {
+            var course = await _courseService.FindByIdAsync(id);
+            var resource = _mapper.Map<Course, CourseResource>(course);
+            return resource;
+        }
+
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] SaveCourseResource resource)
         {
