@@ -24,6 +24,11 @@ namespace Asimov.API.Services
             return await _courseRepository.ListAsync();
         }
 
+        public async Task<Course> FindByIdAsync(int id)
+        {
+            return await _courseRepository.FindByIdAsync(id);
+        }
+
         public async Task<CourseResponse> SaveAsync(Course course)
         {
             try
