@@ -6,6 +6,7 @@ using Asimov.API.Items.Domain.Models;
 using Asimov.API.Shared.Extensions;
 using Asimov.API.Teachers.Domain.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Asimov.API.Shared.Persistence.Contexts
 {
@@ -19,12 +20,18 @@ namespace Asimov.API.Shared.Persistence.Contexts
         public DbSet<TeacherCourse> TeacherCourses { get; set; }
         public DbSet<Competence> Competences { get; set; }
         public DbSet<CourseCompetence> CourseCompetences { get; set; }
+        private readonly IConfiguration _configuration;
 
-        public AppDbContext(DbContextOptions options) : base(options)
+        public AppDbContext(DbContextOptions options, IConfiguration configuration) : base(options)
         {
-            
+            _configuration = configuration;
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder builder)
+        {
+            builder.UseMySQL(_configuration.GetConnectionString("DefaultConnection"));
+        }
+        
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -48,12 +55,12 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 .WithOne(p => p.Director)
                 .HasForeignKey(p => p.DirectorId);
 
-            builder.Entity<Director>().HasData(
+            /*builder.Entity<Director>().HasData(
                 new Director {Id = 1, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "julio@gmail.com", Phone = "987654321"},
                 new Director {Id = 2, FirstName = "Yordy", LastName = "Mochcco", Age = 20, Email = "yordy@gmail.com", Phone = "987654322"},
                 new Director {Id = 3, FirstName = "Pedro", LastName = "Suarez", Age = 35, Email = "pedrito@gmail.com", Phone = "958963854"},
                 new Director {Id = 4, FirstName = "Juan", LastName = "Perez", Age = 26, Email = "jupe@gmail.com", Phone = "985126348"}
-            );
+            );*/
 
             builder.Entity<Announcement>().ToTable("Announcements");
             builder.Entity<Announcement>().HasKey(p => p.Id);
@@ -61,7 +68,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
             builder.Entity<Announcement>().Property(p => p.Title).IsRequired().HasMaxLength(30);
             builder.Entity<Announcement>().Property(p => p.Description).IsRequired().HasMaxLength(300);
             
-            builder.Entity<Announcement>().HasData(
+            /*builder.Entity<Announcement>().HasData(
                 new Announcement {Id = 1, Title = "First Example title", Description = "Example description 1", DirectorId = 1},
                 new Announcement {Id = 2, Title = "Second Example title", Description = "Example description 2", DirectorId = 1},
                 new Announcement {Id = 3, Title = "Third Example title", Description = "Example description 3", DirectorId = 1},
@@ -79,7 +86,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 new Announcement {Id = 15, Title = "Seventh Example title", Description = "Example description 7", DirectorId = 3},
                 new Announcement {Id = 16, Title = "Eighth Example title", Description = "Example description 8", DirectorId = 3}
                 
-            );
+            );*/
             
             builder.Entity<Teacher>().ToTable("Teachers");
             builder.Entity<Teacher>().HasKey(p => p.Id);
@@ -91,7 +98,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
             builder.Entity<Teacher>().Property(p => p.Email).IsRequired().HasMaxLength(30);
             builder.Entity<Teacher>().Property(p => p.Phone).IsRequired().HasMaxLength(30);
 
-            builder.Entity<Teacher>().HasData(
+           /* builder.Entity<Teacher>().HasData(
                 new Teacher
                 {
                     Id = 1, FirstName = "Omar", LastName = "Alvarado", Age = 22, Email = "omar@gmail.com",
@@ -131,7 +138,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
                     Id = 9, FirstName = "Italo", LastName = "Canales", Age = 22, Email = "itsl@gmail.com",
                     Phone = "987654321" , Point = 520 , DirectorId = 1
                 }
-            );
+            );*/
 
 
             builder.Entity<Course>().ToTable("Courses");
@@ -227,7 +234,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 .WithMany(p => p.TeacherCourses)
                 .HasForeignKey(p => p.CourseId);
 
-            builder.Entity<TeacherCourse>().HasData(
+            /*builder.Entity<TeacherCourse>().HasData(
                 new TeacherCourse {TeacherId = 1, CourseId = 1},
                 new TeacherCourse {TeacherId = 1, CourseId = 2},
                 new TeacherCourse {TeacherId = 1, CourseId = 3},
@@ -244,7 +251,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 new TeacherCourse {TeacherId = 4, CourseId = 5},
                 new TeacherCourse {TeacherId = 4, CourseId = 6},
                 new TeacherCourse {TeacherId = 4, CourseId = 7}
-            );
+            );*/
             
             builder.Entity<CourseCompetence>().ToTable("CourseCompetences");
             builder.Entity<CourseCompetence>().HasKey(p => new {p.CourseId, p.CompetenceId});

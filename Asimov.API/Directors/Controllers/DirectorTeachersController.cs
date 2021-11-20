@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Asimov.API.Security.Authorization.Attributes;
 using Asimov.API.Teachers.Domain.Models;
 using Asimov.API.Teachers.Domain.Services;
 using Asimov.API.Teachers.Resources;
@@ -10,6 +11,7 @@ namespace Asimov.API.Directors.Controllers
 {
     [Produces("application/json")]
     [ApiController]
+    [Authorize]
     [Route("/api/v1/directors/{directorId}/teachers")]
     public class DirectorTeachersController : ControllerBase
     {

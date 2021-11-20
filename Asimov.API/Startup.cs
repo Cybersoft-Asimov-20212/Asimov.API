@@ -22,6 +22,10 @@ using Asimov.API.Items.Domain.Repositories;
 using Asimov.API.Items.Domain.Services;
 using Asimov.API.Items.Persistence.Repositories;
 using Asimov.API.Items.Services;
+using Asimov.API.Security.Authorization.Handlers.Implementations;
+using Asimov.API.Security.Authorization.Handlers.Interfaces;
+using Asimov.API.Security.Authorization.Middleware;
+using Asimov.API.Security.Authorization.Settings;
 using Asimov.API.Shared.Domain.Repositories;
 using Asimov.API.Shared.Persistence.Contexts;
 using Asimov.API.Shared.Persistence.Repositories;
@@ -54,6 +58,8 @@ namespace Asimov.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+            
             services.AddControllers();
 
             services.AddRouting(options => options.LowercaseUrls = true);
@@ -63,10 +69,9 @@ namespace Asimov.API
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "Asimov.API", Version = "v1"});
             });
 
-            services.AddDbContext<AppDbContext>(options =>
-            {
-                options.UseInMemoryDatabase("asimov-api-in-memory");
-            });
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
+
+            services.AddDbContext<AppDbContext>();
 
             services.AddScoped<IDirectorRepository, DirectorRepository>();
             services.AddScoped<IDirectorService, DirectorService>();
@@ -84,9 +89,10 @@ namespace Asimov.API
             services.AddScoped<ITeacherCourseService, TeacherCourseService>();
             services.AddScoped<ICourseCompetenceRepository, CourseCompetenceRepository>();
             services.AddScoped<ICourseCompetenceService, CourseCompetenceService>();
+            services.AddScoped<IJwtHandler, JwtHandler>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -99,11 +105,15 @@ namespace Asimov.API
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Asimov.API v1"));
             }
 
-            app.UseCors(x => x
+            app.UseCors(builder => builder
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
+            app.UseMiddleware<JwtMiddleware>();
+            
             app.UseHttpsRedirection(); 
 
             app.UseRouting();

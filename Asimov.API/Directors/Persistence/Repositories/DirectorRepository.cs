@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Asimov.API.Directors.Domain.Models;
 using Asimov.API.Directors.Domain.Repositories;
@@ -27,6 +28,21 @@ namespace Asimov.API.Directors.Persistence.Repositories
         public async Task<Director> FindByIdAsync(int id)
         {
             return await _context.Directors.FindAsync(id);
+        }
+
+        public async Task<Director> FindByEmailAsync(string email)
+        {
+            return await _context.Directors.SingleOrDefaultAsync(p => p.Email == email);
+        }
+
+        public bool ExistByEmail(string email)
+        {
+            return _context.Directors.Any(p => p.Email == email);
+        }
+
+        public Director FindById(int id)
+        {
+            return _context.Directors.Find(id);
         }
 
         public void Update(Director director)
