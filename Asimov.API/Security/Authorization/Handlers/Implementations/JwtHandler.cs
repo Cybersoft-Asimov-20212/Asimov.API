@@ -6,6 +6,7 @@ using System.Text;
 using Asimov.API.Directors.Domain.Models;
 using Asimov.API.Security.Authorization.Handlers.Interfaces;
 using Asimov.API.Security.Authorization.Settings;
+using Asimov.API.Teachers.Domain.Models;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -20,13 +21,28 @@ namespace Asimov.API.Security.Authorization.Handlers.Implementations
             _appSettings = appSettings.Value;
         }
 
-        public string GenerateToken(Director director)
+        public string GenerateTokenForDirector(Director director)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new[] {new Claim("id", director.Id.ToString())}),
+                Expires = DateTime.Now.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
+                    SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            return tokenHandler.WriteToken(token);
+        }
+
+        public string GenerateTokenForTeacher(Teacher teacher)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new[] {new Claim("id", teacher.Id.ToString())}),
                 Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key),
                     SecurityAlgorithms.HmacSha256Signature)

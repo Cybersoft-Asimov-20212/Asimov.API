@@ -26,6 +26,7 @@ namespace Asimov.API.Shared.Mapping
             CreateMap<Item, ItemResource>();
             CreateMap<Competence, CompetenceResource>();
             CreateMap<Director, AuthenticateResponseDirector>();
+            CreateMap<Teacher, AuthenticateResponseTeacher>();
         }
     }
 }

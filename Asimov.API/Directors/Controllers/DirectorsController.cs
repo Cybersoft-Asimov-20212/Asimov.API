@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Asimov.API.Directors.Controllers
 {
     [Produces("application/json")]
-    [Authorize]
+    [AuthorizeDirector]
     [ApiController]
     [Route("/api/v1/[controller]")]
     public class DirectorsController : ControllerBase
@@ -27,7 +27,7 @@ namespace Asimov.API.Directors.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("/auth/sign-in")]
+        [HttpPost("/auth/sign-in/director")]
         public async Task<IActionResult> Authenticate(AuthenticateRequest request)
         {
             var response = await _directorService.Authenticate(request);
@@ -35,7 +35,7 @@ namespace Asimov.API.Directors.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("/auth/sign-up")]
+        [HttpPost("/auth/sign-up/director")]
         public async Task<IActionResult> Register(RegisterRequestDirector request)
         {
             await _directorService.RegisterAsync(request);

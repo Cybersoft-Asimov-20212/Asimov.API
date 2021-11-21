@@ -113,6 +113,7 @@ namespace Asimov.API
             app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseMiddleware<JwtMiddleware>();
+            app.UseMiddleware<JwtMiddlewareTeacher>();
             
             app.UseHttpsRedirection(); 
 

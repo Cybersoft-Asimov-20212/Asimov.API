@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Asimov.API.Courses.Domain.Models;
 using Asimov.API.Courses.Resources;
+using Asimov.API.Security.Authorization.Attributes;
 using Asimov.API.Teachers.Domain.Services;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -10,6 +11,8 @@ namespace Asimov.API.Teachers.Controllers
 {
     [Produces("application/json")]
     [ApiController]
+    [AuthorizeDirector]
+    [AuthorizeTeacher]
     [Route("/api/v1/teachers/{teacherId}/courses")]
     public class TeacherCoursesController : ControllerBase
     {

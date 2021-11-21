@@ -7,6 +7,7 @@ using Asimov.API.Shared.Extensions;
 using Asimov.API.Teachers.Domain.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using BCryptNet = BCrypt.Net.BCrypt;
 
 namespace Asimov.API.Shared.Persistence.Contexts
 {
@@ -55,12 +56,12 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 .WithOne(p => p.Director)
                 .HasForeignKey(p => p.DirectorId);
 
-            /*builder.Entity<Director>().HasData(
-                new Director {Id = 1, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "julio@gmail.com", Phone = "987654321"},
-                new Director {Id = 2, FirstName = "Yordy", LastName = "Mochcco", Age = 20, Email = "yordy@gmail.com", Phone = "987654322"},
-                new Director {Id = 3, FirstName = "Pedro", LastName = "Suarez", Age = 35, Email = "pedrito@gmail.com", Phone = "958963854"},
-                new Director {Id = 4, FirstName = "Juan", LastName = "Perez", Age = 26, Email = "jupe@gmail.com", Phone = "985126348"}
-            );*/
+            builder.Entity<Director>().HasData(
+                new Director {Id = 1, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "julio@gmail.com", PasswordHash = BCryptNet.HashPassword("yulius15"), Phone = "987654321"},
+                new Director {Id = 2, FirstName = "Yordy", LastName = "Mochcco", Age = 20, Email = "yordy@gmail.com", PasswordHash = BCryptNet.HashPassword("yorjeje"), Phone = "987654322"},
+                new Director {Id = 3, FirstName = "Pedro", LastName = "Suarez", Age = 35, Email = "pedrito@gmail.com", PasswordHash = BCryptNet.HashPassword("pedris54"), Phone = "958963854"},
+                new Director {Id = 4, FirstName = "Juan", LastName = "Perez", Age = 26, Email = "jupe@gmail.com", PasswordHash = BCryptNet.HashPassword("jupec85"), Phone = "985126348"}
+            );
 
             builder.Entity<Announcement>().ToTable("Announcements");
             builder.Entity<Announcement>().HasKey(p => p.Id);
@@ -68,7 +69,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
             builder.Entity<Announcement>().Property(p => p.Title).IsRequired().HasMaxLength(30);
             builder.Entity<Announcement>().Property(p => p.Description).IsRequired().HasMaxLength(300);
             
-            /*builder.Entity<Announcement>().HasData(
+            builder.Entity<Announcement>().HasData(
                 new Announcement {Id = 1, Title = "First Example title", Description = "Example description 1", DirectorId = 1},
                 new Announcement {Id = 2, Title = "Second Example title", Description = "Example description 2", DirectorId = 1},
                 new Announcement {Id = 3, Title = "Third Example title", Description = "Example description 3", DirectorId = 1},
@@ -86,7 +87,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 new Announcement {Id = 15, Title = "Seventh Example title", Description = "Example description 7", DirectorId = 3},
                 new Announcement {Id = 16, Title = "Eighth Example title", Description = "Example description 8", DirectorId = 3}
                 
-            );*/
+            );
             
             builder.Entity<Teacher>().ToTable("Teachers");
             builder.Entity<Teacher>().HasKey(p => p.Id);
@@ -98,47 +99,47 @@ namespace Asimov.API.Shared.Persistence.Contexts
             builder.Entity<Teacher>().Property(p => p.Email).IsRequired().HasMaxLength(30);
             builder.Entity<Teacher>().Property(p => p.Phone).IsRequired().HasMaxLength(30);
 
-           /* builder.Entity<Teacher>().HasData(
+            builder.Entity<Teacher>().HasData(
                 new Teacher
                 {
-                    Id = 1, FirstName = "Omar", LastName = "Alvarado", Age = 22, Email = "omar@gmail.com",
+                    Id = 1, FirstName = "Omar", LastName = "Alvarado", Age = 22, Email = "omar@gmail.com", PasswordHash = BCryptNet.HashPassword("alves"), 
                     Phone = "987654321" , Point = 500 , DirectorId = 1
                 },
                 new Teacher
                 {
-                    Id = 2, FirstName = "Maria", LastName = "Vasquez", Age = 20, Email = "marifer@gmail.com",
+                    Id = 2, FirstName = "Maria", LastName = "Vasquez", Age = 20, Email = "marifer@gmail.com", PasswordHash = BCryptNet.HashPassword("fermi52"), 
                     Phone = "987654322" , Point = 400 , DirectorId = 1
                 },
                 new Teacher
                 {
-                    Id = 3, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "jul@gmail.com",
+                    Id = 3, FirstName = "Julio", LastName = "Salazar", Age = 22, Email = "jul@gmail.com", PasswordHash = BCryptNet.HashPassword("yuliusmh"), 
                     Phone = "987654321" , Point = 300 , DirectorId = 1
                 },new Teacher
                 {
-                    Id = 4, FirstName = "Yordy", LastName = "Mochcco", Age = 22, Email = "yor@gmail.com",
+                    Id = 4, FirstName = "Yordy", LastName = "Mochcco", Age = 22, Email = "yor@gmail.com", PasswordHash = BCryptNet.HashPassword("yor584"), 
                     Phone = "987654321" , Point = 420 , DirectorId = 1
                 },new Teacher
                 {
-                    Id = 5, FirstName = "Rosa", LastName = "Gonzales", Age = 22, Email = "ros@gmail.com",
+                    Id = 5, FirstName = "Rosa", LastName = "Gonzales", Age = 22, Email = "ros@gmail.com", PasswordHash = BCryptNet.HashPassword("rousli"), 
                     Phone = "987654321" , Point = 280 , DirectorId = 1
                 },new Teacher
                 {
-                    Id = 6, FirstName = "Piero", LastName = "Perez", Age = 22, Email = "per@gmail.com",
+                    Id = 6, FirstName = "Piero", LastName = "Perez", Age = 22, Email = "per@gmail.com", PasswordHash = BCryptNet.HashPassword("pero54"), 
                     Phone = "987654321" , Point = 340 , DirectorId = 1
                 },new Teacher
                 {
-                    Id = 7, FirstName = "Juan", LastName = "Perez", Age = 22, Email = "jperz@gmail.com",
+                    Id = 7, FirstName = "Juan", LastName = "Perez", Age = 22, Email = "jperz@gmail.com", PasswordHash = BCryptNet.HashPassword("juancito65"), 
                     Phone = "987654321" , Point = 400 , DirectorId = 1
                 },new Teacher
                 {
-                    Id = 8, FirstName = "Rodrigo", LastName = "Sabino", Age = 22, Email = "rod@gmail.com",
+                    Id = 8, FirstName = "Rodrigo", LastName = "Sabino", Age = 22, Email = "rod@gmail.com", PasswordHash = BCryptNet.HashPassword("rodripa"), 
                     Phone = "987654321" , Point = 450 , DirectorId = 1
                 },new Teacher
                 {
-                    Id = 9, FirstName = "Italo", LastName = "Canales", Age = 22, Email = "itsl@gmail.com",
+                    Id = 9, FirstName = "Italo", LastName = "Canales", Age = 22, Email = "itsl@gmail.com", PasswordHash = BCryptNet.HashPassword("laitale"), 
                     Phone = "987654321" , Point = 520 , DirectorId = 1
                 }
-            );*/
+            );
 
 
             builder.Entity<Course>().ToTable("Courses");
@@ -234,7 +235,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 .WithMany(p => p.TeacherCourses)
                 .HasForeignKey(p => p.CourseId);
 
-            /*builder.Entity<TeacherCourse>().HasData(
+            builder.Entity<TeacherCourse>().HasData(
                 new TeacherCourse {TeacherId = 1, CourseId = 1},
                 new TeacherCourse {TeacherId = 1, CourseId = 2},
                 new TeacherCourse {TeacherId = 1, CourseId = 3},
@@ -251,7 +252,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 new TeacherCourse {TeacherId = 4, CourseId = 5},
                 new TeacherCourse {TeacherId = 4, CourseId = 6},
                 new TeacherCourse {TeacherId = 4, CourseId = 7}
-            );*/
+            );
             
             builder.Entity<CourseCompetence>().ToTable("CourseCompetences");
             builder.Entity<CourseCompetence>().HasKey(p => new {p.CourseId, p.CompetenceId});

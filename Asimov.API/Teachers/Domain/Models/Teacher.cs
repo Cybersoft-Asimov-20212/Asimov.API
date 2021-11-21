@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Asimov.API.Directors.Domain.Models;
+using Newtonsoft.Json;
 
 namespace Asimov.API.Teachers.Domain.Models
 {
@@ -11,6 +12,8 @@ namespace Asimov.API.Teachers.Domain.Models
         public string LastName { get; set; }
         public int Age { get; set; }
         public string Email { get; set; }
+        [JsonIgnore]
+        public string PasswordHash { get; set; }
         public string Phone { get; set; }
         
         // Relationships

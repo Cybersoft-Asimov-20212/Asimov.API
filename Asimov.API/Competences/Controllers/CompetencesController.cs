@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Asimov.API.Competences.Domain.Models;
 using Asimov.API.Competences.Domain.Services;
 using Asimov.API.Competences.Resources;
+using Asimov.API.Security.Authorization.Attributes;
 using Asimov.API.Shared.Extensions;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -11,6 +12,8 @@ namespace Asimov.API.Competences.Controllers
 {
     [Produces("application/json")]
     [ApiController]
+    [AuthorizeDirector]
+    [AuthorizeTeacher]
     [Route("api/v1/[controller]")]
     public class CompetencesController : ControllerBase
     {

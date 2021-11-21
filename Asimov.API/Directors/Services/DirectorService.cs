@@ -37,7 +37,7 @@ namespace Asimov.API.Directors.Services
                 throw new AppException("Username or password is incorrect.");
             
             var response = _mapper.Map<AuthenticateResponseDirector>(director);
-            response.Token = _jwtHandler.GenerateToken(director);
+            response.Token = _jwtHandler.GenerateTokenForDirector(director);
             return response;
         }
 
