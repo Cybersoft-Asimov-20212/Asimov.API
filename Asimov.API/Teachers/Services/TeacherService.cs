@@ -68,17 +68,13 @@ namespace Asimov.API.Teachers.Services
 
         public async Task RegisterAsync(RegisterRequestTeacher request)
         {
-            // Validate
             if (_teacherRepository.ExistByEmail(request.Email))
                 throw new AppException($"Email {request.Email} is already taken.");
             
-            // Map request to User 
             var teacher = _mapper.Map<Teacher>(request);
             
-            // Hash Password
             teacher.PasswordHash = BCryptNet.HashPassword(request.Password);
             
-            // Save User
             try
             {
                 await _teacherRepository.AddAsync(teacher);
@@ -94,15 +90,12 @@ namespace Asimov.API.Teachers.Services
         {
             var teacher = GetById(id);
             
-            // Validate
             if (_teacherRepository.ExistByEmail(request.Email))
                 throw new AppException($"Email {request.Email} is already taken.");
             
-            // Hash Password if entered
             if (!string.IsNullOrEmpty(request.Password))
                 teacher.PasswordHash = BCryptNet.HashPassword(request.Password);
             
-            // Map request to User
             _mapper.Map(request, teacher);
             
             try
@@ -137,89 +130,6 @@ namespace Asimov.API.Teachers.Services
             if (teacher == null) throw new KeyNotFoundException("Teacher not found.");
             return teacher;
         }
-
-        /*public async Task<TeacherResponse> SaveAsync(Teacher teacher)
-        {
-            var existingDirector = _directorRepository.FindByIdAsync(teacher.DirectorId);
-
-            if (existingDirector == null)
-                return new TeacherResponse("Invalid Director");
-            
-            var existingTeacherWithEmail = await _teacherRepository.FindByEmailAsync(teacher.Email);
-            
-            if(existingTeacherWithEmail != null)
-                return new TeacherResponse("Teacher Email already exist.");
-
-            try
-            {
-                await _teacherRepository.AddAsync(teacher);
-                await _unitOfWork.CompleteAsync();
-
-                return new TeacherResponse(teacher);
-            }
-            catch (Exception e)
-            {
-                return new TeacherResponse($"An error occurred while saving teacher: {e.Message}");
-            }
-        }
-        
-        public async Task<TeacherResponse> UpdateAsync(int id, Teacher teacher)
-        {
-            var existingTeacher = await _teacherRepository.FindByIdAsync(id);
-
-            if (existingTeacher == null)
-                return new TeacherResponse("Teacher not found");
-            
-            var existingDirector = _directorRepository.FindByIdAsync(teacher.DirectorId);
-
-            if (existingDirector == null)
-                return new TeacherResponse("Invalid Director");
-            
-            var existingTeacherWithEmail = await _teacherRepository.FindByEmailAsync(teacher.Email);
-            
-            if(existingTeacherWithEmail != null && existingTeacherWithEmail.Id != existingTeacher.Id)
-                return new TeacherResponse("Teacher Email already exist.");
-            
-            existingTeacher.FirstName = teacher.FirstName;
-            existingTeacher.LastName = teacher.LastName;
-            existingTeacher.Point = teacher.Point;
-            existingTeacher.Age = teacher.Age;
-            existingTeacher.Email = teacher.Email;
-            existingTeacher.Phone = teacher.Phone;
-            existingTeacher.DirectorId = teacher.DirectorId;
-
-            try
-            {
-                _teacherRepository.Update(existingTeacher);
-                await _unitOfWork.CompleteAsync();
-
-                return new TeacherResponse(existingTeacher);
-            }
-            catch (Exception e)
-            {
-                return new TeacherResponse($"An error occurred while updating teacher: {e.Message}");
-            }
-        }
-        
-        public async Task<TeacherResponse> DeleteAsync(int id)
-        {
-            var existingTeacher = await _teacherRepository.FindByIdAsync(id);
-
-            if (existingTeacher == null)
-                return new TeacherResponse("Teacher not found");
-            
-            try
-            {
-                _teacherRepository.Remove(existingTeacher);
-                await _unitOfWork.CompleteAsync();
-
-                return new TeacherResponse(existingTeacher);
-            }
-            catch (Exception e)
-            {
-                return new TeacherResponse($"An error occurred while deleting teacher: {e.Message}");
-            }
-        }*/
     }
     
     

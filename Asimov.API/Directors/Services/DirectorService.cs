@@ -55,17 +55,13 @@ namespace Asimov.API.Directors.Services
 
         public async Task RegisterAsync(RegisterRequestDirector request)
         {
-            // Validate
             if (_directorRepository.ExistByEmail(request.Email))
                 throw new AppException($"Email {request.Email} is already taken.");
             
-            // Map request to User 
             var director = _mapper.Map<Director>(request);
             
-            // Hash Password
             director.PasswordHash = BCryptNet.HashPassword(request.Password);
             
-            // Save User
             try
             {
                 await _directorRepository.AddAsync(director);
@@ -81,15 +77,12 @@ namespace Asimov.API.Directors.Services
         {
             var director = GetById(id);
             
-            // Validate
             if (_directorRepository.ExistByEmail(request.Email))
                 throw new AppException($"Email {request.Email} is already taken.");
             
-            // Hash Password if entered
             if (!string.IsNullOrEmpty(request.Password))
                 director.PasswordHash = BCryptNet.HashPassword(request.Password);
             
-            // Map request to User
             _mapper.Map(request, director);
             
             try
@@ -124,65 +117,5 @@ namespace Asimov.API.Directors.Services
             if (director == null) throw new KeyNotFoundException("Director not found.");
             return director;
         }
-
-        /*public async Task<DirectorResponse> SaveAsync(Director director)
-        {
-            try
-            {
-                await _directorRepository.AddAsync(director);
-                await _unitOfWork.CompleteAsync();
-
-                return new DirectorResponse(director);
-            }
-            catch (Exception e)
-            {
-                return new DirectorResponse($"An error occurred while saving director: {e.Message}");
-            }
-        }
-
-        public async Task<DirectorResponse> UpdateAsync(int id, Director director)
-        {
-            var existingDirector = await _directorRepository.FindByIdAsync(id);
-
-            if (existingDirector == null)
-                return new DirectorResponse("Director not found");
-            existingDirector.FirstName = director.FirstName;
-            existingDirector.LastName = director.LastName;
-            existingDirector.Age = director.Age;
-            existingDirector.Email = director.Email;
-            existingDirector.Phone = director.Phone;
-
-            try
-            {
-                _directorRepository.Update(existingDirector);
-                await _unitOfWork.CompleteAsync();
-
-                return new DirectorResponse(existingDirector);
-            }
-            catch (Exception e)
-            {
-                return new DirectorResponse($"An error occurred while updating director: {e.Message}");
-            }
-        }
-
-        public async Task<DirectorResponse> DeleteAsync(int id)
-        {
-            var existingDirector = await _directorRepository.FindByIdAsync(id);
-
-            if (existingDirector == null)
-                return new DirectorResponse("Director not found");
-            
-            try
-            {
-                _directorRepository.Remove(existingDirector);
-                await _unitOfWork.CompleteAsync();
-
-                return new DirectorResponse(existingDirector);
-            }
-            catch (Exception e)
-            {
-                return new DirectorResponse($"An error occurred while deleting director: {e.Message}");
-            }
-        }*/
     }
 }

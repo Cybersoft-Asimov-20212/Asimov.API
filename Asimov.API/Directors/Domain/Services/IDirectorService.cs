@@ -14,9 +14,5 @@ namespace Asimov.API.Directors.Domain.Services
         public Task RegisterAsync(RegisterRequestDirector request);
         public Task UpdateAsync(int id, UpdateRequestDirector request);
         public Task DeleteAsync(int id);
-        /*Task<DirectorResponse> SaveAsync(Director director);
-        Task<DirectorResponse> UpdateAsync(int id, Director director);
-        Task<DirectorResponse> DeleteAsync(int id);*/
-
-    }
+        }
 }

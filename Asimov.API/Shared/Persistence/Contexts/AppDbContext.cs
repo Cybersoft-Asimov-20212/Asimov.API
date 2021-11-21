@@ -146,7 +146,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
             builder.Entity<Course>().HasKey(p => p.Id);
             builder.Entity<Course>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Course>().Property(p => p.Name).IsRequired().HasMaxLength(30);
-            builder.Entity<Course>().Property(p => p.Description).IsRequired().HasMaxLength(20);
+            builder.Entity<Course>().Property(p => p.Description).IsRequired().HasMaxLength(500);
             builder.Entity<Course>().Property(p => p.State).IsRequired();
             
             builder.Entity<Course>()
@@ -155,15 +155,15 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 .HasForeignKey(p => p.CourseId);
 
             builder.Entity<Course>().HasData(
-                new Course {Id = 1, Name = "Algebra", Description = "Course of 1st grade", State = false}, 
-                new Course {Id = 2, Name = "Trigonometry", Description = "Course of 2nd grade", State = false},
-                new Course {Id = 3, Name = "Biology", Description = "Course of 2nd grade", State = false},
-                new Course {Id = 4, Name = "Arithmetic", Description = "Course of 2nd grade", State = false},
-                new Course {Id = 5, Name = "Geography", Description = "Course of 2nd grade", State = false},
-                new Course {Id = 6, Name = "Universal history", Description = "Course of 2nd grade", State = false},
-                new Course {Id = 7, Name = "Physical", Description = "Course of 2nd grade", State = false},
-                new Course {Id = 8, Name = "Anatomy", Description = "Course of 2nd grade", State = false},
-                new Course {Id = 9, Name = "chemistry", Description = "Course of 2nd grade", State = false}
+                new Course {Id = 1, Name = "Algebra", Description = "is a branch of mathematics that uses not only numbers and symbols but also letters to solve operations", State = false}, 
+                new Course {Id = 2, Name = "Trigonometry", Description = "is a branch of mathematics, whose etymological meaning is measurement of triangles.", State = false},
+                new Course {Id = 3, Name = "Biology", Description = "is the science that studies living beings and their characteristics, including its origin, evolution and Page 2 its properties, nutrition, morphogenesis, reproduction", State = false},
+                new Course {Id = 4, Name = "Arithmetic", Description = "is the branch of mathematics which studies are numbers and basic operations done with them: addition, subtraction, multiplication and division.", State = false},
+                new Course {Id = 5, Name = "Geography", Description = "is the science that studies and describes the environment around us and gives us information that helps us to know and understand. It is based on the analysis of the physical, social and economic elements that coincide in a specific place and time.", State = false},
+                new Course {Id = 6, Name = "Universal history", Description = "The term World History gathering facts and situations that have developed around the context of the human being, from the appearance of man until today. ... The writing was an event that accelerated the evolution of humanity.", State = false},
+                new Course {Id = 7, Name = "Physical", Description = "is an exact science that studies how the universe taking into account four fundamental properties that are energy, matter, time and space, how they interact and affect each other works.", State = false},
+                new Course {Id = 8, Name = "Anatomy", Description = " is a science that studies the structure of living beings, that is, the shape, topography, location, arrangement and relationship of the organs that compose them", State = false},
+                new Course {Id = 9, Name = "chemistry", Description = "is the study of atoms and molecules and their interactions. The chemical studies reactions and physical changes that occur when creating or transformed compounds.", State = false}
             );
             
             
@@ -177,7 +177,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
             builder.Entity<Item>().HasData(
                 new Item {Id = 1, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 1},
                 new Item {Id = 2, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 1},
-                new Item {Id = 3, Name = "Video", Value = "https://www.youtube.com/watch?v=83RUhxsfLWs", State = false, CourseId = 1},
+                new Item {Id = 3, Name = "Video", Value = "https://www.youtube.com/embed/Wd9dOIlTWCc", State = false, CourseId = 1},
                 new Item {Id = 4, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 2},
                 new Item {Id = 5, Name = "Video", Value = "https://www.youtube.com/embed/LwCRRUa8yTU", State = false, CourseId = 2},
                 new Item {Id = 6, Name = "Documentation", Value = "Today we start with the theorem of...", State = false, CourseId = 3},
@@ -197,27 +197,22 @@ namespace Asimov.API.Shared.Persistence.Contexts
             builder.Entity<Competence>().ToTable("Competences");
             builder.Entity<Competence>().HasKey(p => p.Id);
             builder.Entity<Competence>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
-            builder.Entity<Competence>().Property(p => p.Title).IsRequired().HasMaxLength(30);
-            builder.Entity<Competence>().Property(p => p.Description).IsRequired().HasMaxLength(300);
+            builder.Entity<Competence>().Property(p => p.Title).IsRequired().HasMaxLength(60);
+            builder.Entity<Competence>().Property(p => p.Description).IsRequired().HasMaxLength(2000);
 
             builder.Entity<Competence>().HasData(
-                new Competence {Id = 1, Title = "First Title Com", Description = "First example description"},
-                new Competence {Id = 2, Title = "Second Title Com", Description = "Second example description"},
-                new Competence {Id = 3, Title = "Third Title Com", Description = "Third example description"},
-                new Competence {Id = 4, Title = "Fourth Title Com", Description = "Fourth example description"},
-                new Competence {Id = 5, Title = "Fifth Title Com", Description = "Fifth example description"},
-                new Competence {Id = 6, Title = "Sixth Title Com", Description = "Sixth example description"},
-                new Competence {Id = 7, Title = "Seventh Title Com", Description = "Seventh example description"},
-                new Competence {Id = 8, Title = "Eighth Title Com", Description = "Eighth example description"},
-                new Competence {Id = 9, Title = "Nineth Title Com", Description = "Nineth example description"},
-                new Competence {Id = 10, Title = "Tenth Title Com", Description = "Tenth example description"},
-                new Competence {Id = 11, Title = "Eleventh Title Com", Description = "Eleventh example description"},
-                new Competence {Id = 12, Title = "Twelfth Title Com", Description = "Twelfth example description"},
-                new Competence {Id = 13, Title = "thirteenth Title Com", Description = "thirteenth example description"},
-                new Competence {Id = 14, Title = "Fourteenth Title Com", Description = "Fourteenth example description"},
-                new Competence {Id = 15, Title = "Fifteenth Title Com", Description = "Fifteenth example description"},
-                new Competence {Id = 16, Title = "Sixteenth Title Com", Description = "Sixteenth example description"},
-                new Competence {Id = 17, Title = "Seventeenth Title Com", Description = "Seventeenth example description"}
+                new Competence {Id = 1, Title = "Linguistic communication", Description = "his competence refers to the use of language as an instrument of oral and written communication, of representation, interpretation and understanding of reality, of construction and communication of knowledge and of organization and self-regulation of thought, emotions and behavior."},
+                new Competence {Id = 2, Title = "Mathematical", Description = "It consists of the ability to use and relate numbers, their basic operations, symbols and forms of expression and mathematical reasoning, both to produce and interpret different types of information, as well as to expand knowledge about quantitative and spatial aspects of reality, and to solve problems related to daily life and the world of work."},
+                new Competence {Id = 3, Title = "knowledge and interaction with the physical world.", Description = "It is the ability to interact with the physical world, both in its natural aspects and in those generated by human action, in such a way that the understanding of events, the prediction of consequences and the activity aimed at the improvement and preservation of the conditions of own life, of other people and of the rest of the living beings. In short, it incorporates skills to function properly, with autonomy and personal initiative in very diverse areas of life and knowledge (health, productive activity, consumption, science, technological processes, etc.), and to interpret the world, which requires the application of the basic concepts and principles that allow the analysis of phenomena from the different fields of scientific knowledge involved."},
+                new Competence {Id = 4, Title = "Information processing and digital", Description = "This competence consists of having the skills to search, obtain, process and communicate information, and to transform it into knowledge. It incorporates different skills, ranging from access to information to its transmission on different media once it has been processed, including the use of information and communication technologies as an essential element to inform, learn and communicate."},
+                new Competence {Id = 5, Title = "Social and civic", Description = "This competence makes it possible to understand the social reality in which we live, cooperate, live together and exercise democratic citizenship in a plural society, as well as commit to contributing to its improvement. In it are integrated diverse knowledge and complex skills that allow to participate, make decisions, choose how to behave in certain situations and take responsibility for the choices and decisions made."},
+                new Competence {Id = 6, Title = "Cultural and artistic", Description = "This competence implies knowing, understanding, appreciating and critically evaluating different cultural and artistic manifestations, using them as a source of enrichment and enjoyment and considering them as part of the heritage of the peoples."},
+                new Competence {Id = 7, Title = "learn to learn", Description = "Learning to learn means having the skills to start learning and being able to continue learning in an increasingly effective and autonomous way according to one's own objectives and needs."},
+                new Competence {Id = 8, Title = "Autonomy and personal initiative", Description = "This competence refers, on the one hand, to the acquisition of awareness and application of a set of interrelated personal values attitudes, such as responsibility, perseverance, self-knowledge and self-esteem, creativity, self-criticism, emotional control, the ability to choose, calculate risks, and cope with problems, as well as the ability to delay the need for immediate satisfaction, to learn from mistakes, and to take risks."},
+                new Competence {Id = 9, Title = "Mathematical reasoning", Description = "Ability to use and relate numbers and their basic operations, symbols and forms of expression and mathematical reasoning, both to produce and to interpret different types of information."},
+                new Competence {Id = 10, Title = "Digital competence and information processing ", Description = "Skills in the treatment of information: search, obtain, process and communicate information and be able to transform it into knowledge."},
+                new Competence {Id = 11, Title = "attitudes to continue learning autonomously throughout life ", Description = "Be aware of what you know, how you learn, and how you progress in learning."},
+                new Competence {Id = 12, Title = "Basic Competences in didactic programming", Description = "Basic competencies must be incorporated into the didactic programming. Through them, students must acquire skills, knowledge and attitudes that have functional application in daily life. The competencies to be acquired and developed are"}
             );
 
 
@@ -289,11 +284,35 @@ namespace Asimov.API.Shared.Persistence.Contexts
                 new CourseCompetence {CourseId = 3, CompetenceId = 10},
                 new CourseCompetence {CourseId = 3, CompetenceId = 11},
                 new CourseCompetence {CourseId = 3, CompetenceId = 12},
-                new CourseCompetence {CourseId = 3, CompetenceId = 13},
-                new CourseCompetence {CourseId = 4, CompetenceId = 14},
-                new CourseCompetence {CourseId = 4, CompetenceId = 15},
-                new CourseCompetence {CourseId = 4, CompetenceId = 16},
-                new CourseCompetence {CourseId = 4, CompetenceId = 17}
+                new CourseCompetence {CourseId = 3, CompetenceId = 1},
+                new CourseCompetence {CourseId = 4, CompetenceId = 11},
+                new CourseCompetence {CourseId = 4, CompetenceId = 9},
+                new CourseCompetence {CourseId = 4, CompetenceId = 8},
+                new CourseCompetence {CourseId = 4, CompetenceId = 7},
+                new CourseCompetence {CourseId = 5, CompetenceId = 2},
+                new CourseCompetence {CourseId = 5, CompetenceId = 5},
+                new CourseCompetence {CourseId = 5, CompetenceId = 8},
+                new CourseCompetence {CourseId = 5, CompetenceId = 11},
+                new CourseCompetence {CourseId = 5, CompetenceId = 7},
+                new CourseCompetence {CourseId = 5, CompetenceId = 12},
+                new CourseCompetence {CourseId = 5, CompetenceId = 4},
+                new CourseCompetence {CourseId = 5, CompetenceId = 9},
+                new CourseCompetence {CourseId = 6, CompetenceId = 6},
+                new CourseCompetence {CourseId = 6, CompetenceId = 7},
+                new CourseCompetence {CourseId = 6, CompetenceId = 8},
+                new CourseCompetence {CourseId = 6, CompetenceId = 11},
+                new CourseCompetence {CourseId = 6, CompetenceId = 1},
+                new CourseCompetence {CourseId = 6, CompetenceId = 2},
+                new CourseCompetence {CourseId = 6, CompetenceId = 3},
+                new CourseCompetence {CourseId = 7, CompetenceId = 1},
+                new CourseCompetence {CourseId = 7, CompetenceId = 3},
+                new CourseCompetence {CourseId = 7, CompetenceId = 5},
+                new CourseCompetence {CourseId = 7, CompetenceId = 7},
+                new CourseCompetence {CourseId = 7, CompetenceId = 9},
+                new CourseCompetence {CourseId = 8, CompetenceId = 12},
+                new CourseCompetence {CourseId = 8, CompetenceId = 11},
+                new CourseCompetence {CourseId = 8, CompetenceId = 10},
+                new CourseCompetence {CourseId = 8, CompetenceId = 9}
             );
             
             builder.UseSnakeCaseNamingConvention();

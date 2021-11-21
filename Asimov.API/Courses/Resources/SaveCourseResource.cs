@@ -9,7 +9,7 @@ namespace Asimov.API.Courses.Resources
         public string Name { get; set; }
         
         [Required]
-        [MaxLength(20)]
+        [MaxLength(500)]
         public string Description { get; set; }
         
         [Required]

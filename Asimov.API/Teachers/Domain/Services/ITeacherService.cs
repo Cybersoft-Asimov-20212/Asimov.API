@@ -16,9 +16,5 @@ namespace Asimov.API.Teachers.Domain.Services
         public Task RegisterAsync(RegisterRequestTeacher request);
         public Task UpdateAsync(int id, UpdateRequestTeacher request);
         public Task DeleteAsync(int id);
-        /*Task<TeacherResponse> SaveAsync(Teacher teacher);
-        Task<TeacherResponse> UpdateAsync(int id, Teacher teacher);
-        Task<TeacherResponse> DeleteAsync(int id);*/
-     
     }
 }

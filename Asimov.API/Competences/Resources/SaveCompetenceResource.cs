@@ -5,11 +5,11 @@ namespace Asimov.API.Competences.Resources
     public class SaveCompetenceResource
     {
         [Required]
-        [MaxLength(30)]
+        [MaxLength(60)]
         public string Title { get; set; }
         
         [Required]
-        [MaxLength(300)]
+        [MaxLength(2000)]
         public string Description { get; set; }
     }
 }

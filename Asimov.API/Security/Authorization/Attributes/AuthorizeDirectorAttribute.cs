@@ -12,15 +12,13 @@ namespace Asimov.API.Security.Authorization.Attributes
     {
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            // if actions is decorated with [AllowAnonymous] attribute
             var allowAnonymous = context.ActionDescriptor.EndpointMetadata.OfType<AllowAnonymousAttribute>().Any();
             if (allowAnonymous)
                 return;
 
-            // Authorization process
             var director = (Director) context.HttpContext.Items["Director"];
             if (director == null)
-                context.Result = new JsonResult(new {message = "Unauthorized d"})
+                context.Result = new JsonResult(new {message = "Unauthorized"})
                     {StatusCode = StatusCodes.Status401Unauthorized};
 
         }
