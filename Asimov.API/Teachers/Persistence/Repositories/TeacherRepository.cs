@@ -41,6 +41,16 @@ namespace Asimov.API.Teachers.Persistence.Repositories
                 .FirstOrDefaultAsync(p => p.Email == email);
         }
 
+        public bool ExistByEmail(string email)
+        {
+            return _context.Teachers.Any(p => p.Email == email);
+        }
+
+        public Teacher FindById(int id)
+        {
+            return _context.Teachers.Find(id);
+        }
+
         public async Task<IEnumerable<Teacher>> FindByDirectorId(int directorId)
         {
             return await _context.Teachers

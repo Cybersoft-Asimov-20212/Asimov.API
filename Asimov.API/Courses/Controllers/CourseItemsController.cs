@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Asimov.API.Items.Domain.Models;
 using Asimov.API.Items.Domain.Services;
 using Asimov.API.Items.Resources;
+using Asimov.API.Security.Authorization.Attributes;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,6 +11,7 @@ namespace Asimov.API.Courses.Controllers
 {
     [Produces("application/json")]
     [ApiController]
+    [AuthorizeTeacher]
     [Route("/api/v1/courses/{courseId}/items")]
     public class CourseItemsController : ControllerBase
     {
