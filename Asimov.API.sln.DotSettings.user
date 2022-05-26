@@ -4,7 +4,10 @@
     &lt;TestAncestor&gt;&#xD;
       &lt;TestId&gt;xUnit::D82E0D7F-EBAB-46D6-B806-F0A6CE3684A1::net5.0::Asimov.API.Tests.UnitTest1.Test1&lt;/TestId&gt;&#xD;
       &lt;TestId&gt;xUnit::D82E0D7F-EBAB-46D6-B806-F0A6CE3684A1::net5.0::Asimov.API.Tests.AnnouncementTests.AnnouncementServiceTestsFeature&lt;/TestId&gt;&#xD;
+      &lt;TestId&gt;xUnit::10074E6F-7CAA-47E2-87DB-D0569E02AA46::net5.0::Asimov.API.SystemTests.Features.US002Feature&lt;/TestId&gt;&#xD;
     &lt;/TestAncestor&gt;&#xD;
     &lt;ProjectFile&gt;D82E0D7F-EBAB-46D6-B806-F0A6CE3684A1/f:DirectorServiceTests.feature.cs&lt;/ProjectFile&gt;&#xD;
   &lt;/Or&gt;&#xD;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/SpawnedProcessesKnownList/=chromedriver_002Eexe/@EntryIndexedValue">KillOrphaned</s:String>
+	<s:String x:Key="/Default/Housekeeping/UnitTestingMru/UnitTestRunner/SpawnedProcessesKnownList/=conhost_002Eexe/@EntryIndexedValue">KillOrphaned</s:String></wpf:ResourceDictionary>

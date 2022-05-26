@@ -83,9 +83,6 @@ namespace Asimov.API.Tests.DirectorTests
 #line 7
   testRunner.Given("the Endpoint https://localhost:5001/auth/sign-up/director", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-#line 8
-  testRunner.And("the Endpoint https://localhost:5001/auth/sign-in/director are available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
         }
         
         void System.IDisposable.Dispose()
@@ -96,14 +93,14 @@ namespace Asimov.API.Tests.DirectorTests
         [Xunit.SkippableFactAttribute(DisplayName="Sign-up Director")]
         [Xunit.TraitAttribute("FeatureTitle", "DirectorServiceTests")]
         [Xunit.TraitAttribute("Description", "Sign-up Director")]
-        [Xunit.TraitAttribute("Category", "director-authentication")]
+        [Xunit.TraitAttribute("Category", "director-register")]
         public virtual void Sign_UpDirector()
         {
             string[] tagsOfScenario = new string[] {
-                    "director-authentication"};
+                    "director-register"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign-up Director", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 11
+#line 10
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -125,76 +122,6 @@ this.ScenarioInitialize(scenarioInfo);
                 this.ScenarioStart();
 #line 6
  this.FeatureBackground();
-#line hidden
-                TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
-                            "FirstName",
-                            "LastName",
-                            "Age",
-                            "Email",
-                            "Password",
-                            "Phone"});
-                table7.AddRow(new string[] {
-                            "Ricardo",
-                            "De la Cruz",
-                            "42",
-                            "ric.cruz1212@gmail.com",
-                            "Ss924@d#p_s",
-                            "918274009"});
-#line 12
- testRunner.When("A Post Request is sent", ((string)(null)), table7, "When ");
-#line hidden
-#line 15
- testRunner.Then("A Response with Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 16
- testRunner.And("A Message of \"Registration Successful.\" is included in Response Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Sign-in Director")]
-        [Xunit.TraitAttribute("FeatureTitle", "DirectorServiceTests")]
-        [Xunit.TraitAttribute("Description", "Sign-in Director")]
-        public virtual void Sign_InDirector()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign-in Director", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 18
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 6
- this.FeatureBackground();
-#line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Email",
-                            "Password"});
-                table8.AddRow(new string[] {
-                            "ric.cruz1212@gmail.com",
-                            "Ss924@d#p_s"});
-#line 19
- testRunner.When("A Sign-in Post Request is sent", ((string)(null)), table8, "When ");
-#line hidden
-#line 22
- testRunner.Then("A Response with Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
                 TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
@@ -202,32 +129,36 @@ this.ScenarioInitialize(scenarioInfo);
                             "Age",
                             "Email",
                             "Password",
-                            "Phone",
-                            "Token"});
+                            "Phone"});
                 table9.AddRow(new string[] {
                             "Ricardo",
                             "De la Cruz",
                             "42",
                             "ric.cruz1212@gmail.com",
                             "Ss924@d#p_s",
-                            "918274009",
-                            "Token_code"});
-#line 23
- testRunner.And("A Director Resource with a Token is included in Response Body", ((string)(null)), table9, "And ");
+                            "918274009"});
+#line 11
+ testRunner.When("A Post Request is sent", ((string)(null)), table9, "When ");
+#line hidden
+#line 14
+ testRunner.Then("A Response with Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 15
+ testRunner.And("A Message of \"Registration Successful.\" is included in Response Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Sign-in Director with invalid Password")]
+        [Xunit.SkippableFactAttribute(DisplayName="Sign-up Director with existing Email")]
         [Xunit.TraitAttribute("FeatureTitle", "DirectorServiceTests")]
-        [Xunit.TraitAttribute("Description", "Sign-in Director with invalid Password")]
-        public virtual void Sign_InDirectorWithInvalidPassword()
+        [Xunit.TraitAttribute("Description", "Sign-up Director with existing Email")]
+        public virtual void Sign_UpDirectorWithExistingEmail()
         {
             string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign-in Director with invalid Password", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 27
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign-up Director with existing Email", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 17
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -251,54 +182,21 @@ this.ScenarioInitialize(scenarioInfo);
  this.FeatureBackground();
 #line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "Age",
                             "Email",
-                            "Password"});
+                            "Password",
+                            "Phone"});
                 table10.AddRow(new string[] {
-                            "ric.cruz1212@gmail.com",
-                            "12345"});
-#line 28
- testRunner.When("A Sign-in Post Request is sent", ((string)(null)), table10, "When ");
-#line hidden
-#line 31
- testRunner.Then("A Response with Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-#line 32
- testRunner.And("A Message of \"Username or password is incorrect.\" is included in Response Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line hidden
-            }
-            this.ScenarioCleanup();
-        }
-        
-        [Xunit.SkippableFactAttribute(DisplayName="Sign-up Director with existing Email")]
-        [Xunit.TraitAttribute("FeatureTitle", "DirectorServiceTests")]
-        [Xunit.TraitAttribute("Description", "Sign-up Director with existing Email")]
-        public virtual void Sign_UpDirectorWithExistingEmail()
-        {
-            string[] tagsOfScenario = ((string[])(null));
-            System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign-up Director with existing Email", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 34
-this.ScenarioInitialize(scenarioInfo);
-#line hidden
-            bool isScenarioIgnored = default(bool);
-            bool isFeatureIgnored = default(bool);
-            if ((tagsOfScenario != null))
-            {
-                isScenarioIgnored = tagsOfScenario.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((this._featureTags != null))
-            {
-                isFeatureIgnored = this._featureTags.Where(__entry => __entry != null).Where(__entry => String.Equals(__entry, "ignore", StringComparison.CurrentCultureIgnoreCase)).Any();
-            }
-            if ((isScenarioIgnored || isFeatureIgnored))
-            {
-                testRunner.SkipScenario();
-            }
-            else
-            {
-                this.ScenarioStart();
-#line 6
- this.FeatureBackground();
+                            "Luis",
+                            "Castillo",
+                            "39",
+                            "fernan.82@outlook.com",
+                            "Pls99281",
+                            "992121083"});
+#line 18
+ testRunner.Given("A Director is already stored", ((string)(null)), table10, "Given ");
 #line hidden
                 TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
@@ -310,34 +208,17 @@ this.ScenarioInitialize(scenarioInfo);
                 table11.AddRow(new string[] {
                             "Luis",
                             "Castillo",
-                            "39",
-                            "fernan.82@outlook.com",
-                            "Pls99281",
-                            "992121083"});
-#line 35
- testRunner.Given("A Director is already stored", ((string)(null)), table11, "Given ");
-#line hidden
-                TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
-                            "FirstName",
-                            "LastName",
-                            "Age",
-                            "Email",
-                            "Password",
-                            "Phone"});
-                table12.AddRow(new string[] {
-                            "Luis",
-                            "Castillo",
                             "40",
                             "fernan.82@outlook.com",
                             "Pls99281",
                             "982182734"});
-#line 38
- testRunner.When("A Sign-up Post Request is sent", ((string)(null)), table12, "When ");
+#line 21
+ testRunner.When("A Post Request is sent", ((string)(null)), table11, "When ");
 #line hidden
-#line 41
+#line 24
  testRunner.Then("A Response with Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-#line 42
+#line 25
  testRunner.And("A Message of \"Email {email request} is already taken.\" is included in Response Bo" +
                         "dy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
