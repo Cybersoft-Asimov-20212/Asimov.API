@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace Asimov.API.Tests.AnnouncementTests
+namespace Asimov.API.Tests.FinishedItem
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,7 +19,7 @@ namespace Asimov.API.Tests.AnnouncementTests
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public partial class AnnouncementServiceTestsFeature : object, Xunit.IClassFixture<AnnouncementServiceTestsFeature.FixtureData>, System.IDisposable
+    public partial class FinishedItemServiceTestsFeature : object, Xunit.IClassFixture<FinishedItemServiceTestsFeature.FixtureData>, System.IDisposable
     {
         
         private static TechTalk.SpecFlow.ITestRunner testRunner;
@@ -28,10 +28,10 @@ namespace Asimov.API.Tests.AnnouncementTests
         
         private Xunit.Abstractions.ITestOutputHelper _testOutputHelper;
         
-#line 1 "AnnouncementServiceTests.feature"
+#line 1 "FinishedItemServiceTests.feature"
 #line hidden
         
-        public AnnouncementServiceTestsFeature(AnnouncementServiceTestsFeature.FixtureData fixtureData, Asimov_API_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
+        public FinishedItemServiceTestsFeature(FinishedItemServiceTestsFeature.FixtureData fixtureData, Asimov_API_Tests_XUnitAssemblyFixture assemblyFixture, Xunit.Abstractions.ITestOutputHelper testOutputHelper)
         {
             this._testOutputHelper = testOutputHelper;
             this.TestInitialize();
@@ -40,8 +40,8 @@ namespace Asimov.API.Tests.AnnouncementTests
         public static void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AnnouncementTests", "AnnouncementServiceTests", "\tAs a Developer\r\n\tI want to add new Announcement through API\r\n\tSo that It can be " +
-                    "available for applications.", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "FinishedItem", "FinishedItemServiceTests", "\tAs a Developer\r\n\tI want to complete an Item through API\r\n\tSo that It can be avai" +
+                    "lable for applications.", ProgrammingLanguage.CSharp, ((string[])(null)));
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,24 +81,36 @@ namespace Asimov.API.Tests.AnnouncementTests
 #line 6
  #line hidden
 #line 7
-  testRunner.Given("the Endpoint https://localhost:5001/api/v1/announcements is available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+  testRunner.Given("the Endpoint https://localhost:5001/api/v1/items is available for FinishedItemSer" +
+                    "viceTests", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table1 = new TechTalk.SpecFlow.Table(new string[] {
-                        "FirstName",
-                        "LastName",
-                        "Age",
-                        "Email",
-                        "Password",
-                        "Phone"});
-            table1.AddRow(new string[] {
-                        "Ricardo",
-                        "De la Cruz",
-                        "42",
-                        "ric.cruz1212@gmail.com",
-                        "Ss924@d#p_s",
-                        "918274009"});
+            TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Name",
+                        "Description",
+                        "State"});
+            table11.AddRow(new string[] {
+                        "1",
+                        "Algebra",
+                        "A branch of Mathematics...",
+                        "false"});
 #line 8
-  testRunner.And("A Director is already stored in Director\'s Data", ((string)(null)), table1, "And ");
+  testRunner.Then("A Course is already stored in the table courses", ((string)(null)), table11, "Then ");
+#line hidden
+            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+                        "Id",
+                        "Name",
+                        "Value",
+                        "State",
+                        "CourseId"});
+            table12.AddRow(new string[] {
+                        "1",
+                        "Video",
+                        "https://www.youtube.com/embed/LwCRRUa8yTU",
+                        "false",
+                        "1"});
+#line 11
+  testRunner.And("A Item is already stored in the table items", ((string)(null)), table12, "And ");
 #line hidden
         }
         
@@ -107,17 +119,17 @@ namespace Asimov.API.Tests.AnnouncementTests
             this.TestTearDown();
         }
         
-        [Xunit.SkippableFactAttribute(DisplayName="Add Announcement")]
-        [Xunit.TraitAttribute("FeatureTitle", "AnnouncementServiceTests")]
-        [Xunit.TraitAttribute("Description", "Add Announcement")]
-        [Xunit.TraitAttribute("Category", "announcement-adding")]
-        public virtual void AddAnnouncement()
+        [Xunit.SkippableFactAttribute(DisplayName="Complete Item")]
+        [Xunit.TraitAttribute("FeatureTitle", "FinishedItemServiceTests")]
+        [Xunit.TraitAttribute("Description", "Complete Item")]
+        [Xunit.TraitAttribute("Category", "FinishedItem")]
+        public virtual void CompleteItem()
         {
             string[] tagsOfScenario = new string[] {
-                    "announcement-adding"};
+                    "FinishedItem"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Announcement", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 13
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Complete Item", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+#line 16
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -140,30 +152,36 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table2 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Title",
-                            "Description",
-                            "DirectorId"});
-                table2.AddRow(new string[] {
-                            "Meeting 1",
-                            "New competences to be added",
+                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Value",
+                            "State",
+                            "CourseId"});
+                table13.AddRow(new string[] {
+                            "Video",
+                            "https://www.youtube.com/embed/LwCRRUa8yTU",
+                            "true",
                             "1"});
-#line 14
- testRunner.When("A Post Request to Announcement is sent", ((string)(null)), table2, "When ");
-#line hidden
 #line 17
- testRunner.Then("A Response with Status 200 is received in Announcement", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.When("he clicks the complete button of an item 1", ((string)(null)), table13, "When ");
 #line hidden
-                TechTalk.SpecFlow.Table table3 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Title",
-                            "Description",
-                            "DirectorId"});
-                table3.AddRow(new string[] {
-                            "Meeting 1",
-                            "New competences to be added",
+#line 20
+ testRunner.Then("A Response with Status 200 is received in Items", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Id",
+                            "Name",
+                            "Value",
+                            "State",
+                            "CourseId"});
+                table14.AddRow(new string[] {
+                            "1",
+                            "Video",
+                            "https://www.youtube.com/embed/LwCRRUa8yTU",
+                            "true",
                             "1"});
-#line 18
- testRunner.And("A Announcement Resource is included in Response Body", ((string)(null)), table3, "And ");
+#line 21
+ testRunner.And("the item will be completed and the progress of a course increases", ((string)(null)), table14, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -176,12 +194,12 @@ this.ScenarioInitialize(scenarioInfo);
             
             public FixtureData()
             {
-                AnnouncementServiceTestsFeature.FeatureSetup();
+                FinishedItemServiceTestsFeature.FeatureSetup();
             }
             
             void System.IDisposable.Dispose()
             {
-                AnnouncementServiceTestsFeature.FeatureTearDown();
+                FinishedItemServiceTestsFeature.FeatureTearDown();
             }
         }
     }

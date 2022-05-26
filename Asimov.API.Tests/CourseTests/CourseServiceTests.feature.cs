@@ -123,6 +123,20 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  this.FeatureBackground();
 #line hidden
+                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Name",
+                            "Description",
+                            "State"});
+                table6.AddRow(new string[] {
+                            "Algebra",
+                            "A branch of Mathematics...",
+                            "true"});
+#line 11
+ testRunner.When("A Post Request is sent to Course", ((string)(null)), table6, "When ");
+#line hidden
+#line 14
+  testRunner.Then("A Response with Status 200 is received in Course", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
                 TechTalk.SpecFlow.Table table7 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Description",
@@ -131,22 +145,8 @@ this.ScenarioInitialize(scenarioInfo);
                             "Algebra",
                             "A branch of Mathematics...",
                             "true"});
-#line 11
- testRunner.When("A Post Request is sent to Course", ((string)(null)), table7, "When ");
-#line hidden
-#line 14
-  testRunner.Then("A Response with Status 200 is received in Course", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Name",
-                            "Description",
-                            "State"});
-                table8.AddRow(new string[] {
-                            "Algebra",
-                            "A branch of Mathematics...",
-                            "true"});
 #line 15
-  testRunner.And("A Course Resource is included in Response Body", ((string)(null)), table8, "And ");
+  testRunner.And("A Course Resource is included in Response Body", ((string)(null)), table7, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

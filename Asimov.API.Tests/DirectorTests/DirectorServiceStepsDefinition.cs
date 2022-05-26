@@ -6,6 +6,7 @@ using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
 using Asimov.API.Directors.Resources;
+using Asimov.API.Security.Domain.Services.Communication;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
 using SpecFlow.Internal.Json;
@@ -13,7 +14,7 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Xunit;
 
-namespace Asimov.API.Tests
+namespace Asimov.API.Tests.DirectorTests
 {
     [Binding]
     public class DirectorServiceStepsDefinition
@@ -40,15 +41,15 @@ namespace Asimov.API.Tests
             Client = _factory.CreateClient(new WebApplicationFactoryClientOptions {BaseAddress = BaseUri});
         }
 
-        [When(@"A Post Request is sent")]
+        [When(@"A Post Request is Sent")]
         public void WhenAPostRequestIsSent(Table saveDirectorResource)
         {
-            var resource = saveDirectorResource.CreateSet<SaveDirectorResource>().First();
+            var resource = saveDirectorResource.CreateSet<RegisterRequestDirector>().First();
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
             Response = Client.PostAsync(BaseUri, content);
         }
 
-        [Then(@"A Response with Status (.*) is received")]
+        [Then(@"A Response with Status (.*) is Received")]
         public void ThenAResponseWithStatusIsReceived(int expectedStatus)
         {
             var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
@@ -57,24 +58,24 @@ namespace Asimov.API.Tests
         }
 
         [Then(@"A Message of ""(.*)"" is included in Response Body")]
-        public async void ThenAMessageOfIsIncludedInResponseBody(string expectedMessage)
+        public void ThenAMessageOfIsIncludedInResponseBody(string expectedMessage)
         {
-            var actualMessage = await Response.Result.Content.ReadAsStringAsync();
             var jsonExpectedMessage = expectedMessage.ToJson();
-            var jsonActualMessage = actualMessage.ToJson();
-            Assert.Equal(jsonExpectedMessage, jsonActualMessage);
+            //var actualMessage = await Response.Result.Content.ReadAsStringAsync();
+            //var jsonActualMessage = actualMessage.ToJson();
+            //Assert.Equal(jsonExpectedMessage, jsonActualMessage);
+            var actualMessage = Response.Result.Content.ReadAsStringAsync().Result;
+            var validMessage = actualMessage.Contains(jsonExpectedMessage);
+            Assert.True(validMessage);
         }
 
         [Given(@"A Director is already stored")]
         public async void GivenADirectorIsAlreadyStored(Table existingDirectorResource)
         {
-            var directorUri = new Uri("https://localhost:5001/api/v1/directors");
-            var resource = existingDirectorResource.CreateSet<SaveDirectorResource>().First();
+            var directorUri = new Uri("https://localhost:5001/auth/sign-up/director");
+            var resource = existingDirectorResource.CreateSet<RegisterRequestDirector>().First();
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
-            var directorResponse = Client.PostAsync(directorUri, content);
-            var directorResponseData = await directorResponse.Result.Content.ReadAsStringAsync();
-            var existingDirector = JsonConvert.DeserializeObject<DirectorResource>(directorResponseData);
-            Director = existingDirector;
+            await Client.PostAsync(directorUri, content);
         }
     }
 }

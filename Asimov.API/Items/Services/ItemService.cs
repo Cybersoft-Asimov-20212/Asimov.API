@@ -35,9 +35,10 @@ namespace Asimov.API.Items.Services
 
         public async Task<ItemResponse> SaveAsync(Item item)
         {
+            
             var existingCourse = _courseRepository.FindByIdAsync(item.CourseId);
 
-            if (existingCourse == null)
+            if (existingCourse.Result == null)
                 return new ItemResponse("Invalid Course");
 
             try
@@ -62,7 +63,7 @@ namespace Asimov.API.Items.Services
             
             var existingCourse = _courseRepository.FindByIdAsync(item.CourseId);
 
-            if (existingCourse == null)
+            if (existingCourse == null) 
                 return new ItemResponse("Invalid Course");
 
             existingItem.Name = item.Name;

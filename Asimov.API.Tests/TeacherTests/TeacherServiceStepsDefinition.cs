@@ -2,9 +2,12 @@
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
+using Asimov.API.Directors.Resources;
+using Asimov.API.Security.Domain.Services.Communication;
 using Asimov.API.Teachers.Resources;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
@@ -23,6 +26,7 @@ namespace Asimov.API.Tests.TeacherTests
         private Uri BaseUri { get; set; }
         private Task<HttpResponseMessage> Response { get; set; }
         private TeacherResource Teacher { get; set; }
+        private DirectorResource Director { get; set; }
         
         public TeacherServiceStepsDefinition(WebApplicationFactory<Startup> factory)
         {
@@ -32,14 +36,23 @@ namespace Asimov.API.Tests.TeacherTests
         [Given(@"the Endpoint https://localhost:(.*)/auth/sign-up/teacher is available")]
         public void GivenTheEndpointHttpsLocalhostAuthSignUpTeacherIsAvailable(int port)
         {
-            BaseUri = new Uri($"https://localhost:{port}/auth/sign-up/products");
+            BaseUri = new Uri($"https://localhost:{port}/auth/sign-up/teacher");
             Client = _factory.CreateClient(new WebApplicationFactoryClientOptions {BaseAddress = BaseUri});
         }
-
+        
+        [Given(@"A Director is already Stored")]
+        public async void GivenADirectorIsAlreadyStored(Table existingDirectorResource)
+        {
+            var directorUri = new Uri("https://localhost:5001/auth/sign-up/director");
+            var resource = existingDirectorResource.CreateSet<RegisterRequestDirector>().First();
+            var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
+            await Client.PostAsync(directorUri, content);
+        }
+        
         [When(@"A Post Request is sent to Teacher")]
         public void WhenAPostRequestIsSentToTeacher(Table saveTeacherResource)
         {
-            var resource = saveTeacherResource.CreateSet<SaveTeacherResource>().First();
+            var resource = saveTeacherResource.CreateSet<RegisterRequestTeacher>().First();
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
             Response = Client.PostAsync(BaseUri, content);
         }
@@ -53,23 +66,23 @@ namespace Asimov.API.Tests.TeacherTests
         }
 
         [Then(@"A Message of ""(.*)"" is included in Response Body of Teacher")]
-        public async void ThenAMessageOfIsIncludedInResponseBodyOfTeacher(string expectedMessage)
+        public void ThenAMessageOfIsIncludedInResponseBodyOfTeacher(string expectedMessage)
         {
-            var actualMessage = await Response.Result.Content.ReadAsStringAsync();
             var jsonExpectedMessage = expectedMessage.ToJson();
-            var jsonActualMessage = actualMessage.ToJson();
-            Assert.Equal(jsonExpectedMessage, jsonActualMessage);
+            //var actualMessage = Response.Result.Content.ReadAsStringAsync();
+            //var jsonActualMessage = actualMessage.Result;
+            //Assert.Equal(jsonExpectedMessage, jsonActualMessage);
+            var actualMessage = Response.Result.Content.ReadAsStringAsync().Result;
+            var validMessage = actualMessage.Contains(jsonExpectedMessage);
+            Assert.True(validMessage);
         }
 
         [Given(@"A Teacher is already stored")]
         public async void GivenATeacherIsAlreadyStored(Table existingTeacherResource)
         {
-            var resource = existingTeacherResource.CreateSet<SaveTeacherResource>().First();
+            var resource = existingTeacherResource.CreateSet<RegisterRequestTeacher>().First();
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
-            var teacherResponse = Client.PostAsync(BaseUri, content);
-            var teacherResponseData = await teacherResponse.Result.Content.ReadAsStringAsync();
-            var existingTeacher = JsonConvert.DeserializeObject<TeacherResource>(teacherResponseData);
-            Teacher = existingTeacher;
+            await Client.PostAsync(BaseUri, content);
         }
     }
 }

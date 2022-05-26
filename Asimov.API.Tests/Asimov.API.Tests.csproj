@@ -37,4 +37,22 @@
       </Compile>
     </ItemGroup>
 
+    <ItemGroup>
+      <UpToDateCheckInput Remove="AnnouncementTests\AnnouncementServiceTests.feature" />
+      <UpToDateCheckInput Remove="CompetenceTests\CompetenceServiceTests.feature" />
+      <UpToDateCheckInput Remove="CourseTests\CourseServiceTests.feature" />
+      <UpToDateCheckInput Remove="DirectorTests\DirectorServiceTests.feature" />
+      <UpToDateCheckInput Remove="ItemTests\ItemServiceTests.feature" />
+      <UpToDateCheckInput Remove="TeacherTests\TeacherServiceTests.feature" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <UpToDateCheckBuild Remove="AnnouncementTests\AnnouncementServiceTests.feature.cs" />
+      <UpToDateCheckBuild Remove="CompetenceTests\CompetenceServiceTests.feature.cs" />
+      <UpToDateCheckBuild Remove="CourseTests\CourseServiceTests.feature.cs" />
+      <UpToDateCheckBuild Remove="DirectorTests\DirectorServiceTests.feature.cs" />
+      <UpToDateCheckBuild Remove="ItemTests\ItemServiceTests.feature.cs" />
+      <UpToDateCheckBuild Remove="TeacherTests\TeacherServiceTests.feature.cs" />
+    </ItemGroup>
+
 </Project>

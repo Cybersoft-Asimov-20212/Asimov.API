@@ -83,18 +83,18 @@ namespace Asimov.API.Tests.ItemTests
 #line 7
   testRunner.Given("the Endpoint https://localhost:5001/api/v1/items is available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table12 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "Name",
                         "Description",
                         "State"});
-            table12.AddRow(new string[] {
+            table15.AddRow(new string[] {
                         "1",
                         "Algebra",
                         "A branch of Mathematics...",
                         "true"});
 #line 8
-  testRunner.And("A Course is already stored", ((string)(null)), table12, "And ");
+  testRunner.When("A Course is already stored", ((string)(null)), table15, "When ");
 #line hidden
         }
         
@@ -136,34 +136,34 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table13 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Value",
                             "State",
                             "CourseId"});
-                table13.AddRow(new string[] {
+                table16.AddRow(new string[] {
                             "Documentation",
                             "This is the theorem of...",
                             "true",
                             "1"});
 #line 14
- testRunner.When("A Post Request is sent to Item", ((string)(null)), table13, "When ");
+ testRunner.When("A Post Request is sent to Item", ((string)(null)), table16, "When ");
 #line hidden
 #line 17
   testRunner.Then("A Response with Status 200 is received in Item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
-                TechTalk.SpecFlow.Table table14 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Value",
                             "State",
                             "CourseId"});
-                table14.AddRow(new string[] {
+                table17.AddRow(new string[] {
                             "Documentation",
                             "This is the theorem of...",
                             "true",
                             "1"});
 #line 18
-  testRunner.And("A Item Resource is included in Response Body", ((string)(null)), table14, "And ");
+  testRunner.And("A Item Resource is included in Response Body", ((string)(null)), table17, "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -172,12 +172,14 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableFactAttribute(DisplayName="Add Item with Invalid Course")]
         [Xunit.TraitAttribute("FeatureTitle", "ItemServiceTests")]
         [Xunit.TraitAttribute("Description", "Add Item with Invalid Course")]
+        [Xunit.TraitAttribute("Category", "item-adding-Invalid")]
         public virtual void AddItemWithInvalidCourse()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "item-adding-Invalid"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Add Item with Invalid Course", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 22
+#line 23
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -200,23 +202,23 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table15 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
                             "Name",
                             "Value",
                             "State",
                             "CourseId"});
-                table15.AddRow(new string[] {
+                table18.AddRow(new string[] {
                             "Video",
                             "https://www.youtube.com/...",
-                            "0",
+                            "true",
                             "-1"});
-#line 23
- testRunner.When("A Post Request is sent to Item", ((string)(null)), table15, "When ");
-#line hidden
-#line 26
-    testRunner.Then("A Response with Status 400 is received in Item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 24
+ testRunner.When("A Post Request is sent to Item", ((string)(null)), table18, "When ");
 #line hidden
 #line 27
+    testRunner.Then("A Response with Status 400 is received in Item", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 28
     testRunner.And("A message of \"Invalid Course\" is included in Response Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }

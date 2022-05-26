@@ -123,26 +123,26 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
     this.FeatureBackground();
 #line hidden
+                TechTalk.SpecFlow.Table table4 = new TechTalk.SpecFlow.Table(new string[] {
+                            "Title",
+                            "Description"});
+                table4.AddRow(new string[] {
+                            "Digital Competence",
+                            "The student is capable of..."});
+#line 11
+    testRunner.When("A Post Request to Competence is sent", ((string)(null)), table4, "When ");
+#line hidden
+#line 14
+    testRunner.Then("A Response with Status 200 is received in Competence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
                 TechTalk.SpecFlow.Table table5 = new TechTalk.SpecFlow.Table(new string[] {
                             "Title",
                             "Description"});
                 table5.AddRow(new string[] {
                             "Digital Competence",
                             "The student is capable of..."});
-#line 11
-    testRunner.When("A Post Request to Competence is sent", ((string)(null)), table5, "When ");
-#line hidden
-#line 14
-    testRunner.Then("A Response with Status 200 is received in Competence", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-                TechTalk.SpecFlow.Table table6 = new TechTalk.SpecFlow.Table(new string[] {
-                            "Title",
-                            "Description"});
-                table6.AddRow(new string[] {
-                            "Digital Competence",
-                            "The student is capable of..."});
 #line 15
-    testRunner.And("A Competence Resource is included in Response body", ((string)(null)), table6, "And ");
+    testRunner.And("A Competence Resource is included in Response body", ((string)(null)), table5, "And ");
 #line hidden
             }
             this.ScenarioCleanup();

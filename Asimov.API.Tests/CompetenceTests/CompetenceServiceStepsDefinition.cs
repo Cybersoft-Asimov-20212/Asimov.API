@@ -16,7 +16,7 @@ using Xunit;
 namespace Asimov.API.Tests.CompetenceTests
 {
     [Binding]
-    public class ConpetenceServiceStepsDefinition
+    public class CompetenceServiceStepsDefinition
     {
         private readonly WebApplicationFactory<Startup> _factory;
 
@@ -24,7 +24,7 @@ namespace Asimov.API.Tests.CompetenceTests
         private Uri BaseUri { get; set; }
         private Task<HttpResponseMessage> Response { get; set; }
 
-        public ConpetenceServiceStepsDefinition(WebApplicationFactory<Startup> factory)
+        public CompetenceServiceStepsDefinition(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
@@ -35,8 +35,7 @@ namespace Asimov.API.Tests.CompetenceTests
             BaseUri = new Uri($"https://localhost:{port}/api/v{version}/competences");
             Client = _factory.CreateClient(new WebApplicationFactoryClientOptions {BaseAddress = BaseUri});
         }
-
-
+        
         [When(@"A Post Request to Competence is sent")]
         public void WhenAPostRequestToCompetenceIsSent(Table saveCompetenceResource)
         {

@@ -123,28 +123,28 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table8 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName",
                             "Age",
                             "Email",
                             "Password",
                             "Phone"});
-                table9.AddRow(new string[] {
+                table8.AddRow(new string[] {
                             "Ricardo",
                             "De la Cruz",
                             "42",
-                            "ric.cruz1212@gmail.com",
+                            "fernan.82@outlook.com",
                             "Ss924@d#p_s",
                             "918274009"});
 #line 11
- testRunner.When("A Post Request is sent", ((string)(null)), table9, "When ");
+ testRunner.When("A Post Request is Sent", ((string)(null)), table8, "When ");
 #line hidden
 #line 14
- testRunner.Then("A Response with Status 200 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("A Response with Status 200 is Received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
 #line 15
- testRunner.And("A Message of \"Registration Successful.\" is included in Response Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("A Message of \"Registration successful.\" is included in Response Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
@@ -153,12 +153,14 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableFactAttribute(DisplayName="Sign-up Director with existing Email")]
         [Xunit.TraitAttribute("FeatureTitle", "DirectorServiceTests")]
         [Xunit.TraitAttribute("Description", "Sign-up Director with existing Email")]
+        [Xunit.TraitAttribute("Category", "director-register-with-existing-email")]
         public virtual void Sign_UpDirectorWithExistingEmail()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "director-register-with-existing-email"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Sign-up Director with existing Email", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 17
+#line 18
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -181,6 +183,23 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  this.FeatureBackground();
 #line hidden
+                TechTalk.SpecFlow.Table table9 = new TechTalk.SpecFlow.Table(new string[] {
+                            "FirstName",
+                            "LastName",
+                            "Age",
+                            "Email",
+                            "Password",
+                            "Phone"});
+                table9.AddRow(new string[] {
+                            "Luis",
+                            "Castillo",
+                            "39",
+                            "fernan.82@outlook.com",
+                            "Pls99281",
+                            "992121083"});
+#line 19
+ testRunner.Given("A Director is already stored", ((string)(null)), table9, "Given ");
+#line hidden
                 TechTalk.SpecFlow.Table table10 = new TechTalk.SpecFlow.Table(new string[] {
                             "FirstName",
                             "LastName",
@@ -189,38 +208,21 @@ this.ScenarioInitialize(scenarioInfo);
                             "Password",
                             "Phone"});
                 table10.AddRow(new string[] {
-                            "Luis",
-                            "Castillo",
-                            "39",
-                            "fernan.82@outlook.com",
-                            "Pls99281",
-                            "992121083"});
-#line 18
- testRunner.Given("A Director is already stored", ((string)(null)), table10, "Given ");
-#line hidden
-                TechTalk.SpecFlow.Table table11 = new TechTalk.SpecFlow.Table(new string[] {
-                            "FirstName",
-                            "LastName",
-                            "Age",
-                            "Email",
-                            "Password",
-                            "Phone"});
-                table11.AddRow(new string[] {
-                            "Luis",
+                            "Juanito",
                             "Castillo",
                             "40",
                             "fernan.82@outlook.com",
                             "Pls99281",
                             "982182734"});
-#line 21
- testRunner.When("A Post Request is sent", ((string)(null)), table11, "When ");
-#line hidden
-#line 24
- testRunner.Then("A Response with Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 22
+ testRunner.When("A Post Request is Sent", ((string)(null)), table10, "When ");
 #line hidden
 #line 25
- testRunner.And("A Message of \"Email {email request} is already taken.\" is included in Response Bo" +
-                        "dy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("A Response with Status 400 is Received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 26
+ testRunner.And("A Message of \"Email fernan.82@outlook.com is already taken.\" is included in Respo" +
+                        "nse Body", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();

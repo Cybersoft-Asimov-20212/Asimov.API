@@ -28,10 +28,7 @@ namespace Asimov.API.Shared.Persistence.Contexts
             _configuration = configuration;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
-        {
-            builder.UseMySQL(_configuration.GetConnectionString("DefaultConnection"));
-        }
+       
         
         protected override void OnModelCreating(ModelBuilder builder)
         {

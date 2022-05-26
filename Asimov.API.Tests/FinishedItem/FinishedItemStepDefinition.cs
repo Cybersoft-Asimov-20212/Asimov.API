@@ -14,31 +14,32 @@ using TechTalk.SpecFlow;
 using TechTalk.SpecFlow.Assist;
 using Xunit;
 
-namespace Asimov.API.Tests.ItemTests
+namespace Asimov.API.Tests.FinishedItem
 {
     [Binding]
-    public class ItemServiceStepDefinition
+    public class FinishedItemStepDefinition
     {
         private readonly WebApplicationFactory<Startup> _factory;
+        
         private HttpClient Client { get; set; }
         private Uri BaseUri { get; set; }
         private Task<HttpResponseMessage> Response { get; set; }
         private CourseResource Course { get; set; }
         private ItemResource Item { get; set; }
         
-        public ItemServiceStepDefinition(WebApplicationFactory<Startup> factory)
+        public FinishedItemStepDefinition(WebApplicationFactory<Startup> factory)
         {
             _factory = factory;
         }
-
-        [Given(@"the Endpoint https://localhost:(.*)/api/v(.*)/items is available")]
+        
+        [Given(@"the Endpoint https://localhost:(.*)/api/v(.*)/items is available for FinishedItemServiceTests")]
         public void GivenTheEndpointHttpsLocalhostApiVItemsIsAvailable(int port, int version)
         {
             BaseUri = new Uri($"https://localhost:{port}/api/v{version}/items");
             Client = _factory.CreateClient(new WebApplicationFactoryClientOptions {BaseAddress = BaseUri});
         }
 
-        [When(@"A Course is already stored")]
+        [Then(@"A Course is already stored in the table courses")]
         public async void GivenACourseIsAlreadyStored(Table existingCourseResource)
         {
             var courseUri = new Uri("https://localhost:5001/api/v1/courses");
@@ -49,25 +50,37 @@ namespace Asimov.API.Tests.ItemTests
             var existingCourse = JsonConvert.DeserializeObject<CourseResource>(courseResponseData);
             Course = existingCourse;
         }
-        //Scenario Add Item
-        [When(@"A Post Request is sent to Item")]
-        public void WhenAPostRequestIsSentToItem(Table saveItemResource)
+        
+        [Then(@"A Item is already stored in the table items")]
+        public async void GivenAItemIsAlreadyStoredInTheTableItems(Table existingItemResource)
         {
-            var resource = saveItemResource.CreateSet<SaveItemResource>().First();
+            var itemUri = new Uri("https://localhost:5001/api/v1/items");
+            var resource = existingItemResource.CreateSet<SaveItemResource>().First();
             var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
-            Response = Client.PostAsync(BaseUri, content);
+            var itemResponse = Client.PostAsync(itemUri, content);
+            var itemResponseData = await itemResponse.Result.Content.ReadAsStringAsync();
+            var existingItem = JsonConvert.DeserializeObject<ItemResource>(itemResponseData);
+            Item = existingItem;
         }
-
-        [Then(@"A Response with Status (.*) is received in Item")]
-        public void ThenAResponseWithStatusIsReceivedInItem(int expectedStatus)
+        
+        [When(@"he clicks the complete button of an item (.*)")]
+        public void WhenHeClicksTheCompleteButtonOfAnItem(int idItem, Table updateItemResource)
+        {
+            var resource = updateItemResource.CreateSet<SaveItemResource>().First();
+            var content = new StringContent(resource.ToJson(), Encoding.UTF8, MediaTypeNames.Application.Json);
+            Response = Client.PutAsync(new Uri($"https://localhost:5001/api/v1/items/{idItem}"), content);
+        }
+        
+        [Then(@"A Response with Status (.*) is received in Items")]
+        public void ThenAResponseWithStatusIsReceivedInItems(int expectedStatus)
         {
             var expectedStatusCode = ((HttpStatusCode) expectedStatus).ToString();
             var actualStatusCode = Response.Result.StatusCode.ToString();
             Assert.Equal(expectedStatusCode, actualStatusCode);
         }
-
-        [Then(@"A Item Resource is included in Response Body")]
-        public async void ThenAItemResourceIsIncludedInResponseBody(Table expectedItemResource)
+        
+        [Then(@"the item will be completed and the progress of a course increases")]
+        public async void ThenTheItemWillBeCompletedAndTheProgressOfACourseIncreases(Table expectedItemResource)
         {
             var expectedResource = expectedItemResource.CreateSet<ItemResource>().First();
             var responseData = await Response.Result.Content.ReadAsStringAsync();
@@ -76,15 +89,6 @@ namespace Asimov.API.Tests.ItemTests
             var jsonExpectedResource = expectedResource.ToJson();
             var jsonActualResource = resource.ToJson();
             Assert.Equal(jsonExpectedResource, jsonActualResource);
-        }
-        //Scenario Add Item with Invalid Course
-        [Then(@"A message of (.*) is included in Response Body")]
-        public async void ThenAMessageOfIsIncludedInResponseBody(string expectedMessage)
-        {
-            var actualMessage = await Response.Result.Content.ReadAsStringAsync();
-            var jsonExpectedMessage = expectedMessage.ToJson();
-            var jsonActualMessage = actualMessage.ToJson();
-            Assert.Equal(jsonExpectedMessage, jsonActualMessage);
         }
     }
 }

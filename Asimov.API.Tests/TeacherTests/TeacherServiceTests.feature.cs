@@ -83,7 +83,7 @@ namespace Asimov.API.Tests.TeacherTests
 #line 7
   testRunner.Given("the Endpoint https://localhost:5001/auth/sign-up/teacher is available", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
-            TechTalk.SpecFlow.Table table16 = new TechTalk.SpecFlow.Table(new string[] {
+            TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
                         "Id",
                         "FirstName",
                         "LastName",
@@ -91,7 +91,7 @@ namespace Asimov.API.Tests.TeacherTests
                         "Email",
                         "Password",
                         "Phone"});
-            table16.AddRow(new string[] {
+            table19.AddRow(new string[] {
                         "1",
                         "Ricardo",
                         "De la Cruz",
@@ -100,7 +100,7 @@ namespace Asimov.API.Tests.TeacherTests
                         "Ss924@d#p_s",
                         "918274009"});
 #line 8
-  testRunner.And("A Director is already stored", ((string)(null)), table16, "And ");
+  testRunner.And("A Director is already Stored", ((string)(null)), table19, "And ");
 #line hidden
         }
         
@@ -142,7 +142,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table17 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table20 = new TechTalk.SpecFlow.Table(new string[] {
                             "Point",
                             "FirstName",
                             "LastName",
@@ -151,7 +151,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Password",
                             "Phone",
                             "DirectorId"});
-                table17.AddRow(new string[] {
+                table20.AddRow(new string[] {
                             "100",
                             "Alexandra",
                             "Ortega",
@@ -159,9 +159,9 @@ this.ScenarioInitialize(scenarioInfo);
                             "ale.12@gmail.com",
                             "pl012KsQ",
                             "911029382",
-                            "2"});
+                            "1"});
 #line 14
- testRunner.When("A Post Request is sent to Teacher", ((string)(null)), table17, "When ");
+ testRunner.When("A Post Request is sent to Teacher", ((string)(null)), table20, "When ");
 #line hidden
 #line 17
    testRunner.Then("A Response with Status 200 is received in Teacher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
@@ -176,12 +176,14 @@ this.ScenarioInitialize(scenarioInfo);
         [Xunit.SkippableFactAttribute(DisplayName="Register Teacher with existing Email")]
         [Xunit.TraitAttribute("FeatureTitle", "TeacherServiceTests")]
         [Xunit.TraitAttribute("Description", "Register Teacher with existing Email")]
+        [Xunit.TraitAttribute("Category", "teacher-register")]
         public virtual void RegisterTeacherWithExistingEmail()
         {
-            string[] tagsOfScenario = ((string[])(null));
+            string[] tagsOfScenario = new string[] {
+                    "teacher-register"};
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Register Teacher with existing Email", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
-#line 20
+#line 21
 this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
@@ -204,7 +206,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 6
  this.FeatureBackground();
 #line hidden
-                TechTalk.SpecFlow.Table table18 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table21 = new TechTalk.SpecFlow.Table(new string[] {
                             "Point",
                             "FirstName",
                             "LastName",
@@ -213,7 +215,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Password",
                             "Phone",
                             "DirectorId"});
-                table18.AddRow(new string[] {
+                table21.AddRow(new string[] {
                             "100",
                             "Alexandra",
                             "Ortega",
@@ -221,11 +223,11 @@ this.ScenarioInitialize(scenarioInfo);
                             "ale.12@gmail.com",
                             "pl012KsQ",
                             "911029382",
-                            "2"});
-#line 21
- testRunner.Given("A Teacher is already stored", ((string)(null)), table18, "Given ");
+                            "1"});
+#line 22
+ testRunner.Given("A Teacher is already stored", ((string)(null)), table21, "Given ");
 #line hidden
-                TechTalk.SpecFlow.Table table19 = new TechTalk.SpecFlow.Table(new string[] {
+                TechTalk.SpecFlow.Table table22 = new TechTalk.SpecFlow.Table(new string[] {
                             "Point",
                             "FirstName",
                             "LastName",
@@ -234,7 +236,7 @@ this.ScenarioInitialize(scenarioInfo);
                             "Password",
                             "Phone",
                             "DirectorId"});
-                table19.AddRow(new string[] {
+                table22.AddRow(new string[] {
                             "120",
                             "Carlos",
                             "Ortega",
@@ -243,15 +245,15 @@ this.ScenarioInitialize(scenarioInfo);
                             "99llsdP2",
                             "911029332",
                             "1"});
-#line 24
- testRunner.When("A Post Request is sent to Teacher", ((string)(null)), table19, "When ");
-#line hidden
-#line 27
- testRunner.Then("A Response with Status 400 is received", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 25
+ testRunner.When("A Post Request is sent to Teacher", ((string)(null)), table22, "When ");
 #line hidden
 #line 28
- testRunner.And("A Message of \"Email {email request} is already taken.\" is included in Response Bo" +
-                        "dy", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.Then("A Response with Status 400 is received in Teacher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+#line 29
+ testRunner.And("A Message of \"Email ale.12@gmail.com is already taken.\" is included in Response B" +
+                        "ody of Teacher", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             }
             this.ScenarioCleanup();
